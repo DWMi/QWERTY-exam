@@ -1,0 +1,333 @@
+.bannerCon {
+  position: relative;
+}
+.infoBoxCon {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  align-items: center;
+  height: 100%;
+}
+.infoBox {
+  position: relative;
+  margin-right: 80px;
+  padding: 30px;
+  width: 50%;
+  background-color: rgba(0, 0, 0, 0.527);
+}
+.contentCon {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* padding: 0px 160px; */
+}
+
+.content {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  /* display: flex;
+    flex-direction: column; */
+  /* padding: 0px 370px; */
+}
+
+.brandsCon {
+  grid-column: span 12;
+  gap: 1%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+.brandPicCon {
+  margin: 40px 0px;
+  position: relative;
+  grid-column: span 6;
+  padding: 0 20%;
+  display: flex;
+  justify-content: center;
+}
+.brandInfoBox {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid 1px white;
+  color: white;
+  background-color: black;
+  width: 50%;
+  bottom: -25px;
+  gap: 5px;
+  padding: 10px;
+}
+
+.promoBanCon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0px 35px;
+  margin: 40px 0 40px 0;
+  bottom: 0;
+  grid-column: span 12;
+}
+.promoPicCon {
+  position: relative;
+  width: 80%;
+  height: 100%;
+  /* object-fit: fill; */
+}
+
+.promoInfoBox {
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f7f7;
+  padding: 15px;
+  width: 35%;
+  align-items: flex-start;
+  justify-content: center;
+}
+.bannerText {
+  color: black;
+}
+.bannerTitle{
+    color:black;
+    margin: 10px;
+}
+.promoInfoCon {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  align-items: center;
+  justify-content: flex-start;
+  left: 12%;
+}
+
+.bestSeller {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bestSellerItem {
+  width: 100%;
+  /* display: grid;
+    grid-template-columns: repeat(8, 1fr); */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px;
+}
+
+.bsPicCon{
+    
+    /* grid-column: span 2; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+.catPics{
+    width: 100%;
+    height: 100%;
+}
+.contactUsBanCon{
+    width: 100%;
+    display: flex; 
+    justify-content: center;
+    margin: 40px;
+}
+.contactUs {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+.contactTextCon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  align-items: center;
+  right: 5%;
+}
+.contactText {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  background-color: white;
+  padding: 70px;
+  box-shadow: 5px 10px 10px#00000054;
+}
+.contactBtnCon {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 20px;
+}
+.contactBtn {
+  font-size: 11px;
+  padding: 10px 25px;
+  background-color: black;
+  border: none;
+  color: white;
+}
+
+.brandPic:hover{
+  transform: scale(1.02);
+  box-shadow: 10px 10px black;
+  transform-origin: bottom;
+}
+.brandPic{
+  width: 100%;
+  height: 100%;
+  transition: all 200ms ease-in-out;
+  
+  
+}
+
+/* ------------------MQ------------------------------ */
+@media screen and (max-width: 930px){
+  
+    .brandInfoBox {
+        width: 80%;
+    }
+    
+    .brandPicCon{
+        padding: 0 10px;
+    }
+    .promoPicCon{
+        width: 100%;
+    }
+    .promoInfoBox{
+        width: 50%;
+    }
+    .bannerText{
+        font-size: 17px;
+    }
+    .bannerTitle{
+        font-size:18px;
+        margin: 5px;
+    }
+    .promoInfoCon{
+        left: 4%;
+    }
+    .infoBoxText{
+        font-size: 11px;
+        margin-top: 5px;
+    }   
+    .infoBox{
+        margin-right: 20px;
+        width: 50%;
+        padding: 5px;
+    }
+    .contactText{
+        padding: 40px;
+        width: 50%;
+    }
+    .contactText >h1{
+        font-size: 20px;
+    }
+    .contactText > p{
+        
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 520px){
+    .bannerText{
+        font-size: 12px;
+    }
+    .bannerTitle{
+        font-size:16px;
+    }
+    .promoInfoCon{
+        left: 7%;
+    } .contactText{
+        padding:30px; 
+        width: 70%;
+    }
+    .infoBox{
+        margin-right: 20px;
+        width: 70%;
+        padding: 5px;
+    }
+    .infoBoxText{
+        font-size: 10px;
+        margin-top: 5px;
+    }   
+    .contactTextCon{
+        right: -10%;	
+    }
+
+  .contactText > h1 {
+    font-size: 18px;
+  }
+  .contactText > p {
+    font-size: 10px;
+  }
+  .contactBtn {
+    font-size: 8px;
+    padding: 8px 22px;
+  }
+}
+
+@media screen and (max-width: 378px){
+  
+    .brandPicCon{
+        padding:0 10px;
+    }
+    .promoPicCon{
+        width: 100%;
+    }
+    .promoBanCon {
+        padding: 10px;
+    }
+    .infoBox{
+        margin-right: 20px;
+        width: 70%;
+        padding: 5px;
+    }
+    .infoBoxText{
+        font-size: 8px;
+        margin-top: 5px;
+    }   
+    .promoInfoBox{
+        width: 40%;
+        height: 88%;
+    }
+    .bannerText{
+        font-size: 8px;
+    }
+    .bannerTitle{
+        font-size:10px;
+    }
+    .promoInfoCon{
+        left: 3%;
+    }
+    .contactText{
+        width: 70%;
+    }
+    .contactText >h1{
+        font-size: 18px;
+    }
+    .contactText > p{
+        
+        font-size: 10px;
+    }
+    .contactTextCon{
+        right: -9%;
+    }
+
+}

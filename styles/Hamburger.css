@@ -1,0 +1,86 @@
+
+.bm-burger-button {
+    width: 36px;
+    height: 30px;
+    left: 36px;
+    top: 36px;
+  }
+  
+  .bm-burger-bars {
+    background: #373a47;
+  }  
+
+  .bm-burger-bars-hover {
+    background: #a90000;
+
+  }
+  
+  .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+  
+  .bm-cross {
+    background: #FF5C00;
+  }
+  
+
+  
+  .bm-menu {
+    background: #000000f3;
+    padding: 0.3rem 0.3rem 0;
+    font-size: 1.15em;
+    width:100%; 
+    display: flex!important;
+    justify-content: center!important;
+    gap: 10%;
+    flex-direction: column;
+  }
+  .bm-menu-wrap{
+ 
+    position: fixed!important;
+    right: inherit;
+    z-index: 1100;
+    width: 50vw!important ;
+    top:0%;
+    height: 100%;
+    transition: all 0.5s ease 0s;
+  }
+  .bm-morph-shape {
+    fill: #373a47;
+  }
+
+  .bm-item-list {
+    display: flex;
+    flex-direction: column;
+    color: #b8b7ad;
+    padding: 0.8em;
+    gap: 20px;
+    
+  }
+
+  
+  .bm-item {
+    display: inline-block;
+  }
+  
+  .bm-overlay {
+    background-color: transparent!important;
+  }
+/* styling next link component so that will be a column list of links*/
+  .bm-item-list a {
+    display: flex;
+    flex-direction: column;
+    margin: 2px;
+    margin-left: 15px;
+
+  }
+
+  @media screen and (max-width: 400px){
+
+    .bm-item-list a {
+      
+      font-size: 15px;
+    }
+
+  }

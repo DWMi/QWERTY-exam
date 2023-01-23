@@ -1,0 +1,45 @@
+
+.centerContainer {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    flex-wrap: wrap;
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.bannerContainer{
+    position: relative;
+    width: 100%;
+    height: 400px;
+    margin-bottom: 30px;
+}
+
+.bannerText {
+    color: white;
+    position: absolute;
+    top: 200px;
+    left: 140px;
+}
+
+.headerText {
+    font-size: 60px;
+}
+@media screen and (max-width: 520px){
+
+    .bannerText {
+
+        left: 50px;
+    }
+}

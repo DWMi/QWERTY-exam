@@ -1,0 +1,108 @@
+.centerContainer {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 100px;
+  gap: 20px;
+}
+
+.imgMainContainer {
+  width: 500px;
+  height: 500px;
+  border: 1px solid lightgrey;
+}
+
+.container {
+  display: flex;
+  gap: 30px;
+  width: 60%;
+  margin: 50px;
+}
+
+.productInfoDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.productSelectDiv {
+  display: flex;
+  height: 50px;
+}
+
+.ProductPageButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid 1px white;
+  color: white;
+  background-color: black;
+  bottom: -25px;
+  gap: 5px;
+  padding: 10px;
+  transition: all 200ms ease-in-out;
+}
+
+.ProductPageButton:hover {
+  scale: 1.01;
+  box-shadow: 10px 10px black;
+}
+
+
+
+@media screen and (max-width: 930px) {
+
+  .container{
+    flex-direction: column;
+    margin: 10px;
+    width: 80%;
+  }
+  .ProductPageButton{
+    
+    font-size:15px;
+  }
+  .imgMainContainer{
+    width: 100%;
+  }
+}
+
+/* -----------------------CHECKOUT---------------------------- */
+.tableContainer{
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.orderMQCon{
+  display: flex;
+  gap:10px;
+  flex-direction: row;
+  justify-content: flex-start ;
+  align-items:center;
+  width: 80%;
+  border: 1px solid rgba(0, 0, 0, 0.445);
+  border-radius: 10px;
+  padding: 10px;
+
+}
+.orderCardCon{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap:10px;
+  font-weight: bold;
+  width: 100%;
+}
+
+@media screen and (max-width: 1055px) {
+   .tableContainer{
+    width: 90%;
+  }
+  
+}

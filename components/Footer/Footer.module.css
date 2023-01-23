@@ -1,0 +1,72 @@
+.footerCon {
+  min-height: 304px;
+  background-color: #111010;
+  display: flex;
+  align-items: center;
+  /* padding: 20px; */
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.backToTop {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  text-decoration: underline;
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  padding: 20px;
+  color: white;
+}
+.boxDad {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 60px;
+}
+.box1Con {
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+.box1 {
+  /* margin: 00px 0px 40px 211px; */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+}
+.box2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media screen and (max-width: 930px) {
+  .footerCon {
+    min-height: 304px;
+    flex-wrap: wrap;
+
+    justify-content: center;
+  }
+  .boxDad {
+    padding: 30px 50px;
+  }
+  .box1Con {
+    width: 100%;
+  }
+  .box1,
+  .box2,
+  .box3 {
+    text-align: center;
+  }
+}
