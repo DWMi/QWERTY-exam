@@ -83,7 +83,7 @@ const handler = async (req, res) => {
         );
       });
 
-      db.disconnect();
+      await db.disconnect();
 
       res.status(201).send({
         message: "New Order added!",
