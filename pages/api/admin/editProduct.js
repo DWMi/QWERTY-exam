@@ -25,8 +25,8 @@ async function handler(req, res) {
   const updateProd = await Product.findOneAndUpdate(filter, update, {
     returnOriginal: false,
   });
-  updateProd.save();
-  db.disconnect();
+  await updateProd.save();
+  await db.disconnect();
   console.log(updateProd);
 
   res.send(updateProd);
