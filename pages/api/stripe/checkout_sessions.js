@@ -76,8 +76,8 @@ export default async function handler(req, res) {
           },
         ],
         line_items: req.body.cartItems.map((product) => {
-          let imgArray = []
-          imgArray.push(product.img1)
+          let imgArray = [];
+          imgArray.push(product.img1);
           return {
             price_data: {
               currency: "sek",
@@ -87,7 +87,7 @@ export default async function handler(req, res) {
                 images: imgArray,
                 metadata: {
                   selectedSwitch: product.selectedSwitch,
-                  id: product._id
+                  id: product._id,
                 },
               },
             },
@@ -95,6 +95,7 @@ export default async function handler(req, res) {
           };
         }),
         mode: "payment",
+        allow_promotion_codes: true,
         success_url: `${req.headers.origin}/checkout/success?sessionId={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
       });

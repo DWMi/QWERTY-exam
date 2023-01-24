@@ -92,15 +92,11 @@
   scale: 1.1;
 }
 
-
-
-
-@media screen and (max-width: 590px){
-
-  .AdminProductRow{
+@media screen and (max-width: 590px) {
+  .AdminProductRow {
     width: 100%;
   }
-  .mqCon{
+  .mqCon {
     display: flex;
     flex-direction: row;
     gap: 20px;
@@ -108,14 +104,14 @@
     padding: 10px;
     margin: 10px;
   }
- .mqBox1, .mqBox2{
-  display: flex;
-  flex-direction: column;
-  gap:30px;
-  justify-content: baseline;
-}
-.mqBox1{
-
-  font-weight: bold;
-}
+  .mqBox1,
+  .mqBox2 {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: baseline;
+  }
+  .mqBox1 {
+    font-weight: bold;
+  }
 }

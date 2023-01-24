@@ -1,65 +1,65 @@
-.container{
-    width: 100%;
-    height: 100vh;
+.container {
+  width: 100%;
+  height: 100vh;
 }
-.contactCon{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    gap: 10%;
-    margin-top: 20px;
-    margin-bottom:20px;
+.contactCon {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  gap: 10%;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
-.formCon{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    gap:20px;
+.formCon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 20px;
 }
-.contactInput{
-    width: 400px;
-    border: 0.2px solid #828282!important;
-    padding: 10px;
-    opacity: 0.5;
-
-}
-
-.contactInputText{
-
-    width: 400px;
-    border: 0.2px solid #828282!important;
-    padding: 10px;
-    opacity: 0.5;
-    height: 100px;
-    
+.contactInput {
+  width: 100%;
+  height: 67.75px;
+  padding: 20px;
+  box-shadow: 10px 10px black;
+  border: 1px solid;
+  border-radius: 0 !important;
 }
 
-.submitBtn{
-    color: white;
-    background-color: black!important;
-    padding: 10px 40px!important;
-    border-radius: 0!important;
-}
-.submitBtn:hover{
-    background-color: black;
-    border:1px solid white;
-    cursor: pointer;
-    transform: scale(1.02);
-    box-shadow: 10px 10px black;
-    transform-origin: bottom;
+.contactInputText {
+  width: 100%;
+  height: 67.75px;
+  padding: 20px;
+  box-shadow: 10px 10px black;
+  border: 1px solid;
+  border-radius: 0 !important;
 }
 
-@media screen and (max-width: 650px){
+.submitBtn {
+  color: white;
+  background-color: black !important;
+  padding: 10px 40px !important;
+  border-radius: 0 !important;
+}
+.submitBtn:hover {
+  background-color: black;
+  border: 1px solid white;
+  cursor: pointer;
+  transform: scale(1.02);
+  box-shadow: 10px 10px black;
+  transform-origin: bottom;
+}
 
-.formCon{
-    
+@media screen and (max-width: 650px) {
+  .formCon {
     margin: 10px;
-}
+  }
 
-.contactInput, .contactInputText{
+  .contactInput,
+  .contactInputText {
     width: 100%;
-}
+  }
 }
