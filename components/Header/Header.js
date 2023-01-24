@@ -3,7 +3,6 @@ import Image from "next/image";
 import LOGO from "../../public/brandPic/QWERTYLOGO.svg";
 import Link from "next/link";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { Abel } from "@next/font/google";
 import useSWR from "swr";
 import fetcher from "../../utils/fetcher";
 import { useRouter } from "next/router";
@@ -13,11 +12,8 @@ import { Menu } from "@headlessui/react";
 import DropdownLink from "../Dropdown Link/DropdownLink";
 import { useCart } from "react-use-cart";
 import { useEffect, useState } from "react";
-
 import HamburgerMenu from "../Hamburger/Hamburger";
 import { useMediaQuery } from "@mui/material";
-
-const fontStyle = Abel({ weight: "400", subnets: ["sans-serif"] });
 
 const Header = () => {
   const { data, error } = useSWR("/api/categories/get-all-categories", fetcher);
@@ -34,14 +30,14 @@ const Header = () => {
   const logoutHandler = () => {
     signOut({ callbackUrl: "/" });
   };
-  const isTabletOrPhone = useMediaQuery("(max-width:590px)");
+  const isTabletOrPhone = useMediaQuery("(max-width:710px)");
   return (
     <div className={style.headerCon}>
       <Link href="/">
         <Image src={LOGO} alt="QWERTY LOGO" />
       </Link>
       {!isTabletOrPhone ? (
-        <div className={`${style.headerLinksCon} ${fontStyle.className}`}>
+        <div className={`${style.headerLinksCon}`}>
           <Link className={style.headerLinks} href="/">
             HOME
           </Link>

@@ -1,10 +1,11 @@
-import { Abel } from "@next/font/google";
-
-const fontStyle = Abel({ weight: "400", subnets: ["sans-serif"] });
+import Head from "next/head";
 
 const tc = () => {
   return (
     <>
+      <Head>
+        <title>QWERTY - Terms & Conditions</title>
+      </Head>
       <div style={{ padding: "40px", color: "black" }}>
         <h1 style={{ textAlign: "center" }}>
           Terms and Conditions for QWERTY{" "}

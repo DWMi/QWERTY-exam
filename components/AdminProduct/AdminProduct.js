@@ -87,7 +87,7 @@ const AdminProduct = (props) => {
         backgroundColor: "white 0.5",
       }}
     >
-      <Box sx={{ ...style, width: "80%", height: "80%" }}>
+      <Box sx={{ ...style, width: "80%", height: "90%", overflowY: "auto" }}>
         <h1 style={{ margin: "30px" }}>Edit Product</h1>
         <br></br>
         <form

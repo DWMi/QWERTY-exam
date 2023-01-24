@@ -1,9 +1,7 @@
 import s from "../styles/faq.module.css";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useState } from "react";
-import { Abel } from "@next/font/google";
-
-const fontStyle = Abel({ weight: "400", subnets: ["sans-serif"] });
+import Head from "next/head";
 
 const faq = () => {
   const [activeQuestion, setActiveQuestion] = useState(null);
@@ -52,25 +50,34 @@ const faq = () => {
   ];
 
   return (
-    <div className={s.faqContainer}>
-      <div className={s.faqCon}>
-        <h1 className={s.faqTitle}>FAQ - QWERTY</h1>
-        {questions.map((question, index) => (
-          <div className={s.faqBox} key={index}>
-            <div
-              className={s.questionBox}
-              onClick={() =>
-                setActiveQuestion(activeQuestion === index ? null : index)
-              }
-            >
-              {question.question}
-              {activeQuestion === index ? <IoIosArrowUp /> : <IoIosArrowDown />}
+    <>
+      <Head>
+        <title>QWERTY - FAQs</title>
+      </Head>
+      <div className={s.faqContainer}>
+        <div className={s.faqCon}>
+          <h1 className={s.faqTitle}>FAQ - QWERTY</h1>
+          {questions.map((question, index) => (
+            <div className={s.faqBox} key={index}>
+              <div
+                className={s.questionBox}
+                onClick={() =>
+                  setActiveQuestion(activeQuestion === index ? null : index)
+                }
+              >
+                {question.question}
+                {activeQuestion === index ? (
+                  <IoIosArrowUp />
+                ) : (
+                  <IoIosArrowDown />
+                )}
+              </div>
+              {activeQuestion === index && <p>{question.answer}</p>}
             </div>
-            {activeQuestion === index && <p>{question.answer}</p>}
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 export default faq;

@@ -82,6 +82,7 @@ a {
   display: flex;
   padding: 2px;
   transition: opacity 200ms ease-in-out;
+  white-space: nowrap;
 }
 
 .dropdown-link:hover {

@@ -8,9 +8,7 @@ import { toast } from "react-toastify";
 import { getError } from "../utils/error.js";
 import { useRouter } from "next/router.js";
 import axios from "axios";
-import { Abel } from "@next/font/google";
-
-const fontStyle = Abel({ weight: "400", subnets: ["sans-serif"] });
+import Head from "next/head";
 
 export default function Login() {
   const { data: session } = useSession();
@@ -56,128 +54,136 @@ export default function Login() {
     }
   };
   return (
-    <div className={styles.LoginFormContainer}>
-      <form className={styles.LoginForm} onSubmit={handleSubmit(submitHandler)}>
-        <h1 className={styles.LoginTitle}>Register Account</h1>
-        <input
-          className={styles.LoginEmailInput}
-          placeholder="First Name"
-          type="text"
-          {...register("firstName", {
-            required: "Please enter your first name",
-          })}
-          id="firstName"
-          autoFocus
-        ></input>
-        {errors.firstName && (
-          <div className={styles.LoginEmailInputErrorMessage}>
-            <p>{errors.firstName.message}</p>
-          </div>
-        )}
-        <input
-          className={styles.LoginEmailInput}
-          placeholder="Last Name"
-          type="text"
-          {...register("lastName", {
-            required: "Please enter your last name",
-          })}
-          id="lastName"
-        ></input>
-        {errors.lastName && (
-          <div className={styles.LoginEmailInputErrorMessage}>
-            <p>{errors.lastName.message}</p>
-          </div>
-        )}
-        <input
-          className={styles.LoginEmailInput}
-          placeholder="Address"
-          type="text"
-          {...register("address", {
-            required: "Please enter your address",
-          })}
-          id="address"
-        ></input>
-        {errors.address && (
-          <div className={styles.LoginEmailInputErrorMessage}>
-            <p>{errors.address.message}</p>
-          </div>
-        )}
-        <input
-          className={styles.LoginEmailInput}
-          placeholder="Email"
-          type="email"
-          {...register("email", {
-            required: "Please enter your email",
-            pattern: {
-              value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i,
-              message: "Please enter a valid email",
-            },
-          })}
-          id="email"
-        ></input>
-        {errors.email && (
-          <div className={styles.LoginEmailInputErrorMessage}>
-            <p>{errors.email.message}</p>
-          </div>
-        )}
-        <input
-          className={styles.LoginPasswordInput}
-          placeholder="Password"
-          type="password"
-          {...register("password", {
-            required: "Please enter your password",
-            minLength: {
-              value: 5,
-              message: "Password must be longer that 5 characters",
-            },
-          })}
-          id="password"
-        ></input>
-        {errors.password && (
-          <div className={styles.LoginPasswordInputErrorMessage}>
-            <p>{errors.password.message}</p>
-          </div>
-        )}
-        <input
-          className={styles.LoginPasswordInput}
-          placeholder="Confirm password"
-          type="password"
-          {...register("confirmPassword", {
-            required: "Please confirm your password",
-            validate: (value) => value === getValues("password"),
-            minLength: {
-              value: 5,
-              message: "Password must be longer that 5 characters",
-            },
-          })}
-          id="confirmPassword"
-        ></input>
-        {errors.confirmPassword && (
-          <div className={styles.LoginPasswordInputErrorMessage}>
-            <p>{errors.confirmPassword.message}</p>
-          </div>
-        )}
-        {errors.confirmPassword &&
-          errors.confirmPassword.type === "validate" && (
-            <div className={styles.LoginPasswordInputErrorMessage}>
-              <p>Password do not match</p>
+    <>
+      <Head>
+        <title>QWERTY - Register</title>
+      </Head>
+      <div className={styles.LoginFormContainer}>
+        <form
+          className={styles.LoginForm}
+          onSubmit={handleSubmit(submitHandler)}
+        >
+          <h1 className={styles.LoginTitle}>Register Account</h1>
+          <input
+            className={styles.LoginEmailInput}
+            placeholder="First Name"
+            type="text"
+            {...register("firstName", {
+              required: "Please enter your first name",
+            })}
+            id="firstName"
+            autoFocus
+          ></input>
+          {errors.firstName && (
+            <div className={styles.LoginEmailInputErrorMessage}>
+              <p>{errors.firstName.message}</p>
             </div>
           )}
-        <button className={styles.LoginButton}>Register</button>
-        <div className={styles.LoginRedirectToRegisterContainer}>
-          <p>Already have an account?</p> <br></br>
-          <p>
-            Click{" "}
-            <Link
-              className={styles.LoginLinkToRegister}
-              href={`/login?redirect=${redirect || "/"}`}
-            >
-              here
-            </Link>{" "}
-            to login.
-          </p>
-        </div>
-      </form>
-    </div>
+          <input
+            className={styles.LoginEmailInput}
+            placeholder="Last Name"
+            type="text"
+            {...register("lastName", {
+              required: "Please enter your last name",
+            })}
+            id="lastName"
+          ></input>
+          {errors.lastName && (
+            <div className={styles.LoginEmailInputErrorMessage}>
+              <p>{errors.lastName.message}</p>
+            </div>
+          )}
+          <input
+            className={styles.LoginEmailInput}
+            placeholder="Address"
+            type="text"
+            {...register("address", {
+              required: "Please enter your address",
+            })}
+            id="address"
+          ></input>
+          {errors.address && (
+            <div className={styles.LoginEmailInputErrorMessage}>
+              <p>{errors.address.message}</p>
+            </div>
+          )}
+          <input
+            className={styles.LoginEmailInput}
+            placeholder="Email"
+            type="email"
+            {...register("email", {
+              required: "Please enter your email",
+              pattern: {
+                value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i,
+                message: "Please enter a valid email",
+              },
+            })}
+            id="email"
+          ></input>
+          {errors.email && (
+            <div className={styles.LoginEmailInputErrorMessage}>
+              <p>{errors.email.message}</p>
+            </div>
+          )}
+          <input
+            className={styles.LoginPasswordInput}
+            placeholder="Password"
+            type="password"
+            {...register("password", {
+              required: "Please enter your password",
+              minLength: {
+                value: 5,
+                message: "Password must be longer that 5 characters",
+              },
+            })}
+            id="password"
+          ></input>
+          {errors.password && (
+            <div className={styles.LoginPasswordInputErrorMessage}>
+              <p>{errors.password.message}</p>
+            </div>
+          )}
+          <input
+            className={styles.LoginPasswordInput}
+            placeholder="Confirm password"
+            type="password"
+            {...register("confirmPassword", {
+              required: "Please confirm your password",
+              validate: (value) => value === getValues("password"),
+              minLength: {
+                value: 5,
+                message: "Password must be longer that 5 characters",
+              },
+            })}
+            id="confirmPassword"
+          ></input>
+          {errors.confirmPassword && (
+            <div className={styles.LoginPasswordInputErrorMessage}>
+              <p>{errors.confirmPassword.message}</p>
+            </div>
+          )}
+          {errors.confirmPassword &&
+            errors.confirmPassword.type === "validate" && (
+              <div className={styles.LoginPasswordInputErrorMessage}>
+                <p>Password do not match</p>
+              </div>
+            )}
+          <button className={styles.LoginButton}>Register</button>
+          <div className={styles.LoginRedirectToRegisterContainer}>
+            <p>Already have an account?</p> <br></br>
+            <p>
+              Click{" "}
+              <Link
+                className={styles.LoginLinkToRegister}
+                href={`/login?redirect=${redirect || "/"}`}
+              >
+                here
+              </Link>{" "}
+              to login.
+            </p>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }

@@ -2,24 +2,20 @@ import styles from "../styles/Home.module.css";
 import Image from "next/image";
 import BANNER from "../public/brandPic/landingBanner.png";
 import Link from "next/link";
-import brandPic1 from "../public/brandPic/Keychron.png";
-import brandPic2 from "../public/brandPic/Varmilo.png";
-import brandPic3 from "../public/brandPic/Ducky.png";
-import brandPic4 from "../public/brandPic/Yunzii.png";
 import promoBanner from "../public/brandPic/promoBanner.png";
-import bs1 from "../public/assets/yunziikeynovoif98pro1.webp";
 import contactUs from "../public/brandPic/contactUs.png";
 import Product from "../models/Product";
 import Category from "../models/Category";
 import db from "../utils/db";
 import ProductCard from "../components/ProductCard/ProductCard";
-import { Abel } from "@next/font/google";
-
-const fontStyle = Abel({ weight: "400", subnets: ["sans-serif"] });
+import Head from "next/head";
 
 const Landing = ({ products, categories }) => {
   return (
     <>
+      <Head>
+        <title>QWERTY - Home</title>
+      </Head>
       <div className={styles.bannerCon}>
         <div style={{ height: "100%", height: "40%" }}>
           <div className={styles.infoBoxCon}>
@@ -79,7 +75,7 @@ const Landing = ({ products, categories }) => {
                               <Image
                                 priority
                                 eager
-                                src={`/brandPic/${brand.img}`}
+                                src={brand.img}
                                 className={styles.brandPic}
                                 alt="brand name"
                                 width={2000}
@@ -151,7 +147,9 @@ const Landing = ({ products, categories }) => {
                     in anyway.
                   </p>
                   <div className={styles.contactBtnCon}>
-                    <button className={styles.contactBtn}>CONTACT US</button>
+                    <a className={styles.contactBtn} href="/contact">
+                      <button>CONTACT US</button>
+                    </a>
                   </div>
                 </div>
               </div>
