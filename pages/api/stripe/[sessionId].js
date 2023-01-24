@@ -75,9 +75,9 @@ const handler = async (req, res) => {
 
       const order = await newOrder.save();
 
-      //THIS UPDATES THE QTY IN STOCK FOR EACH PRODUCT THAT WAS PURCHASED
+       //THIS UPDATES THE QTY IN STOCK FOR EACH PRODUCT THAT WAS PURCHASED
       order.orderItems.map(async (product) => {
-        await Product.updateOne(
+        await Product.findOneAndUpdate(
           { _id: product.productId },
           { $inc: { qty: -product.qty } }
         );
