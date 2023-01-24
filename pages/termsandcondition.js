@@ -10,7 +10,6 @@ const tc = () => {
         <h1 style={{ textAlign: "center" }}>
           Terms and Conditions for QWERTY{" "}
         </h1>
-
         <h2>1. Introduction</h2>
         <p>
           Welcome to the QWERTY ("Store"). These terms and conditions ("Terms",
@@ -20,7 +19,6 @@ const tc = () => {
           of the Store and any of its products or services (collectively,
           "Store" or "Services").
         </p>
-
         <h2>2. Agreement to Terms</h2>
         <p>
           By accessing or using the Store, you agree that you have read,
@@ -29,7 +27,6 @@ const tc = () => {
           using or accessing this site. The materials contained in this Store
           are protected by applicable copyright and trademark law.
         </p>
-
         <h2>3. Use License</h2>
         <p>
           Permission is granted to temporarily download one copy of the
@@ -57,7 +54,6 @@ const tc = () => {
           this license, you must destroy any downloaded materials in your
           possession whether in electronic or printed format.
         </p>
-
         <h2>4. Product Orders</h2>
         <p>
           By placing an order through the Store, you are making an offer to
@@ -104,17 +100,15 @@ const tc = () => {
         <h2>Contact Us</h2>
         <p>
           If you have any questions about these Terms and Conditions, You can
-          contact us:
+          contact us via email:
+          <a
+            style={{ fontWeight: "bold" }}
+            href="mailto:info.qwertykeyboards@gmail.com"
+          >
+            {" "}
+            info.qwertykeyboards@gmail.com
+          </a>
         </p>
-        <ul>
-          <li>
-            By email:
-            <a style={{ fontWeight: "bold" }} href="mailto:info@qwerty.com">
-              {" "}
-              info@qwerty.com
-            </a>
-          </li>
-        </ul>
       </div>
     </>
   );
