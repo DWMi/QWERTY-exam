@@ -11,6 +11,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
 
 export default function successPage() {
   const router = useRouter();
@@ -20,6 +22,18 @@ export default function successPage() {
   const { data, error } = useSWR(URL, fetcher);
 
   console.log(data?.order);
+  
+  if (data?.order == undefined) {
+    return (
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        style={{ height: "100vh" }}
+        open={true}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    );
+  }
 
   const { emptyCart } = useCart();
 
