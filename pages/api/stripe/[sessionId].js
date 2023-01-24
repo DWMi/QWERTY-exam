@@ -74,16 +74,19 @@ const handler = async (req, res) => {
       });
 
       const order = await newOrder.save();
-
-       //THIS UPDATES THE QTY IN STOCK FOR EACH PRODUCT THAT WAS PURCHASED
-      order.orderItems.map(async (product) => {
-        await Product.findOneAndUpdate(
-          { _id: product.productId },
-          { $inc: { qty: -product.qty } }
-        );
-      });
-
       await db.disconnect();
+
+      //THIS UPDATES THE QTY IN STOCK FOR EACH PRODUCT THAT WAS PURCHASED
+      order.orderItems.map(async (product) => {
+        await db.connect();
+        const filter = { _id: product.productId };
+        const update = { qty: -product.qty };
+        const updateProd = await Product.findOneAndUpdate(filter, update, {
+          returnOriginal: false,
+        });
+        updateProd.save();
+        await db.disconnect();
+      });
 
       res.status(201).send({
         message: "New Order added!",
