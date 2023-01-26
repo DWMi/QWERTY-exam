@@ -159,7 +159,46 @@ const Header = () => {
           </Link>
         </div>
       ) : (
-        <HamburgerMenu totalCartItems={totalCartItems} data={data} />
+        <div style={{ display: "flex", width: "90%" }}>
+          <HamburgerMenu
+            totalCartItems={totalCartItems}
+            data={data}
+          />
+          <Link className={style.cartIconMq} href="/checkout">
+            <div style={{ display: "flex", flexDirection: "row", justifyContent:'center', alignItems: 'center' }}>
+              <AiOutlineShoppingCart
+                style={{
+                  stroke: "black",
+                  strokeWidth: "10",
+                  fontSize: "20px",
+                  position: "relative",
+                }}
+              />
+              {totalCartItems > 0 ? (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    background: "red",
+                    borderRadius: "50%",
+                    padding: "5px",
+                    width: "15px",
+                    height: "15px",
+                    position: "absolute",
+                    left: "15px",
+                    top: "7px",
+                  }}
+                >
+                  <p style={{ fontSize: "12px", color: "white" }}>
+                    {totalCartItems}
+                  </p>
+                </div>
+              ) : null}
+            </div>
+          </Link>
+        </div>
+   
       )}
     </div>
   );
