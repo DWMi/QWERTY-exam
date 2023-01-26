@@ -37,6 +37,7 @@ const AdminProduct = (props) => {
   const [price, setPrice] = React.useState("");
   const [qty, setQty] = React.useState("");
   const [category, setCategory] = React.useState("");
+  const [description, setDescription] = React.useState("");
 
   useEffect(() => {
     //hello
@@ -46,6 +47,7 @@ const AdminProduct = (props) => {
     setQty("");
     setCategory("");
     setMain("");
+    setDescription("");
   }, []);
 
   const { handleSubmit, register, getValues } = useForm();
@@ -61,6 +63,7 @@ const AdminProduct = (props) => {
       const response = await axios.post("/api/admin/editProduct", {
         _id: props.product._id,
         name: name || props.product.name,
+        description: description || props.product.description,
         pictures,
         price: price || props.product.price,
         qty: qty || props.product.qty,
@@ -71,6 +74,7 @@ const AdminProduct = (props) => {
       setQty("");
       setCategory("");
       setMain("");
+      setDescription("");
       props.setOpen(false);
       router.push("/admin/products");
       console.log(response);
@@ -114,6 +118,24 @@ const AdminProduct = (props) => {
               id="name"
               autoFocus
             ></input>
+          </div>
+          <div className={styles.AdminProductRowSingleElement}>
+            <h3>Description:</h3>
+            <textarea
+              {...register("description", {
+                required: false,
+              })}
+              value={description}
+              onChange={(event) => {
+                setMain(event.target.value);
+                setDescription(event.target.value);
+              }}
+              className={styles.LoginEmailInput}
+              placeholder={props.product?.description}
+              type="text"
+              id="description"
+              autoFocus
+            ></textarea>
           </div>
           <div className={styles.AdminProductRowSingleElement}>
             {" "}
