@@ -9,12 +9,19 @@ import Category from "../models/Category";
 import db from "../utils/db";
 import ProductCard from "../components/ProductCard/ProductCard";
 import Head from "next/head";
+import CookieConsent from "react-cookie-consent";
 
 const Landing = ({ products, categories }) => {
   return (
     <>
       <Head>
         <title>QWERTY - Home</title>
+        <meta name="description" content="QWERTY - Your one-stop shop for custom built mechanical keyboards, accessories, and more. We specialize in Keychron, Ducky, Yunzii, Varmilo and other mechanical keyboard brands."/>
+        <meta name="keywords" content="mechanical keyboard, custom keyboard, Keychron, Ducky, Yunzii, Varmilo, keyboard accessories"/>
+        <meta name="robots" content="index, follow"/>
+        <meta name="author" content="QWERTY"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.bannerCon}>
         <div style={{ height: "100%", height: "40%" }}>

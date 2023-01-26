@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import "../styles/Hamburger.css";
+import "../styles/cookie.css";
 import Layout from "../components/Layout/Layout";
 import { SessionProvider } from "next-auth/react";
 import { CartProvider } from "react-use-cart";

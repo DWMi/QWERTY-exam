@@ -180,7 +180,7 @@
   width: 100%;
   margin: 20px;
 }
-.contactBtn {
+.contactBtn, #rcc-confirm-button{
   font-size: 11px;
   padding: 10px 25px;
   background-color: black;
@@ -189,7 +189,7 @@
   transition: all 200ms ease-in-out;
 }
 
-.contactBtn:hover {
+.contactBtn:hover, #rcc-confirm-button:hover{
   scale: 1.1;
   border: 1px solid white;
   box-shadow: 10px 10px black;

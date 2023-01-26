@@ -67,8 +67,12 @@
   align-items: center;
 }
 
+.LoginLinkToRegister{
+  text-decoration: underline;
+}
 .LoginLinkToRegister:hover {
   opacity: 0.5;
+ 
 }
 
 

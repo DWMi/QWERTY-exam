@@ -60,15 +60,15 @@ const Footer = () => {
             }}
           >
             <li>
-              <Link href="/Keyboards">Keyboards</Link>
+              <Link href="/category/Keyboards">Keyboards</Link>
             </li>
             <li>
-              <Link href="/Accessories">Accessories</Link>
+              <Link href="/category/Accessories">Accessories</Link>
             </li>
           </ul>
         </div>
         <div className={style.box2}>
-          <p style={{ fontWeight: "bold", color: "white" }}> Shipping </p>
+          <p style={{ fontWeight: "bold", color: "white" }}> General questions </p>
           <br></br>
           <ul
             style={{
@@ -83,6 +83,9 @@ const Footer = () => {
               <Link href="/faq">FAQs</Link>
             </li>
             <li>
+            <Link href='/cookies'>Cookiepolicy</Link>
+           </li>
+            <li>
               <Link href="/termsandcondition">Terms & Conditions</Link>
             </li>
           </ul>
@@ -90,7 +93,7 @@ const Footer = () => {
         <div className={style.box2}>
           <p style={{ fontWeight: "bold", color: "white" }}>
             {" "}
-            Contact Information{" "}
+           About QWERTY{" "}
           </p>
           <br></br>
           <ul
@@ -102,7 +105,7 @@ const Footer = () => {
               color: "white",
             }}
           >
-            <li>123 Some Street, 41234, Göteborg, Sweden</li>
+            <li>123 Some Street 41234 Göteborg, Sweden</li>
             <li>0123456789</li>
             <a href="mailto:info.qwertykeyboards@gmail.com">
               <li>info.qwertykeyboards@gmail.com</li>

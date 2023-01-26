@@ -57,6 +57,12 @@ export default function Login() {
     <>
       <Head>
         <title>QWERTY - Register</title>
+        <meta name="description" content="QWERTY - Your one-stop shop for custom built mechanical keyboards, accessories, and more. We specialize in Keychron, Ducky, Yunzii, Varmilo and other mechanical keyboard brands."/>
+        <meta name="keywords" content="mechanical keyboard, custom keyboard, Keychron, Ducky, Yunzii, Varmilo, keyboard accessories"/>
+        <meta name="robots" content="index, follow"/>
+        <meta name="author" content="QWERTY"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.LoginFormContainer}>
         <form
