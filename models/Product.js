@@ -10,6 +10,10 @@ const ProductsSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    description: {
+      type: String,
+      required: false,
+    },
     brand: {
       type: String,
       required: false,

@@ -12,10 +12,11 @@ async function handler(req, res) {
         });
         return;
     }  */
-  const { _id, name, pictures, price, qty, category } = req.body;
+  const { _id, name, description, pictures, price, qty, category } = req.body;
   const filter = { _id: _id };
   const update = {
     name: name,
+    description: description,
     pictures: pictures,
     price: price,
     qty: qty,

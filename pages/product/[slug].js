@@ -60,18 +60,24 @@ export default function SingleProduct({ product }) {
     <>
       <Head>
         <title>QWERTY - {router.query.slug}</title>
-        <meta name="description" content="QWERTY - Your one-stop shop for custom built mechanical keyboards, accessories, and more. We specialize in Keychron, Ducky, Yunzii, Varmilo and other mechanical keyboard brands."/>
-        <meta name="keywords" content="mechanical keyboard, custom keyboard, Keychron, Ducky, Yunzii, Varmilo, keyboard accessories"/>
-        <meta name="robots" content="index, follow"/>
-        <meta name="author" content="QWERTY"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta
+          name="description"
+          content="QWERTY - Your one-stop shop for custom built mechanical keyboards, accessories, and more. We specialize in Keychron, Ducky, Yunzii, Varmilo and other mechanical keyboard brands."
+        />
+        <meta
+          name="keywords"
+          content="mechanical keyboard, custom keyboard, Keychron, Ducky, Yunzii, Varmilo, keyboard accessories"
+        />
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="QWERTY" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={s.centerContainer}>
         <div className={s.container}>
           <div className={s.imgMainContainer}>
             <Image
-            alt={product.name}
+              alt={product.name}
               src={imgSrc1}
               width={1000}
               height={1000}
@@ -80,7 +86,7 @@ export default function SingleProduct({ product }) {
 
             {product.img2 ? (
               <Image
-               alt={product.name}
+                alt={product.name}
                 src={imgSrc2}
                 width={1000}
                 height={1000}
@@ -160,6 +166,9 @@ export default function SingleProduct({ product }) {
                   ADD TO CART
                 </button>
               )}
+            </div>
+            <div style={{ width: "100%", marginTop: "30px" }}>
+              <h1>{product.description}</h1>
             </div>
           </div>
         </div>
