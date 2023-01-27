@@ -44,6 +44,11 @@ const faq = () => {
         "It depends on how far along your order is in the packing process. If you want to cancel your order pleace contact customer service as soon as possible.",
     },
     {
+      question: "How do i change my profile infomation?",
+      answer:
+        "If you want to change your profile information please contact our customer service and we'll sort it out for you.",
+    },
+    {
       question: "Do you offer international shipping?",
       answer:
         "Right now we only ship to Sweden, Norway and Denmark Please contact our customer team service for further information.",

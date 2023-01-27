@@ -100,7 +100,6 @@ export default async function handler(req, res) {
         cancel_url: `${req.headers.origin}/?canceled=true`,
       });
       res.json({ id: session.id });
-      console.log(session);
     } catch (err) {
       res.status(err.statusCode || 500).json(err.message);
     }

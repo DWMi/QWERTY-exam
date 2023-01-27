@@ -77,7 +77,6 @@ const AdminProduct = (props) => {
       setDescription("");
       props.setOpen(false);
       router.push("/admin/products");
-      console.log(response);
     } catch (err) {
       console.log(getError(err));
     }
@@ -208,7 +207,7 @@ const AdminProduct = (props) => {
           </div>
           <div className={styles.AdminProductRowSingleElement}>
             {" "}
-            <h3 for="category">Choose a category:</h3>
+            <h3 htmlFor="category">Choose a category:</h3>
             <input
               {...register("category", {
                 required: false,

@@ -42,7 +42,7 @@ export default function BrandsPage({ products }) {
         <div className={s.container}>
           {products &&
             products.map((prod) => {
-              return <ProductCard prod={prod} />;
+              return <ProductCard key={prod._id} prod={prod} />;
             })}
         </div>
       </div>

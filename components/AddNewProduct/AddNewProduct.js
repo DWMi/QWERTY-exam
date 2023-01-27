@@ -80,14 +80,12 @@ const AddNewProd = (props) => {
         method: "POST",
         body: formDataOne,
       }).then((r) => r.json());
-      console.log(imageResponseOne);
       let image2slug;
       if (imageTwo) {
         const imageResponseTwo = await fetch(url, {
           method: "POST",
           body: formDataTwo,
         }).then((r) => r.json());
-        console.log(imageResponseTwo);
         image2slug = imageResponseTwo.secure_url;
       }
       if (category === "Keyboards") {
@@ -100,7 +98,6 @@ const AddNewProd = (props) => {
           qty: qty,
           category: category,
         });
-        console.log(response);
       } else {
         const response = await axios.post(
           "/api/admin/addNewProductNoSwitches",
@@ -114,7 +111,6 @@ const AddNewProd = (props) => {
             category: category,
           }
         );
-        console.log(response);
       }
       setName("");
       setBrand("");
@@ -251,7 +247,7 @@ const AddNewProd = (props) => {
           </div>
           <div className={styles.AdminProductRowSingleElement}>
             {" "}
-            <h3 for="category">Choose a category:</h3>
+            <h3 htmlFor="category">Choose a category:</h3>
             <select
               {...register("category", {
                 required: false,

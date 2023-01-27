@@ -15,7 +15,6 @@ export default function Login() {
   const { redirect } = router.query;
   useEffect(() => {
     if (session?.user) {
-      console.log("User is logged in!");
       router.push(redirect || "/");
     }
   }, [router, session, redirect]);

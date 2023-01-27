@@ -13,15 +13,17 @@ import { useMediaQuery } from "@mui/material";
 export default function Dashboard() {
   const { data: session } = useSession();
   const router = useRouter();
-  console.log(session?.user);
-  console.log(router);
+
   useEffect(() => {
     if (!session?.user.isAdmin) {
       router.push("/");
       //make unauthorized page later
     }
   }, []);
+if(!session?.user.isAdmin){
 
+  return <div className={styles.AdminDashboardContainer}><h1>401 Not Authorized</h1> </div>
+}
   const isTabletOrPhone = useMediaQuery("(max-width:819px)");
 
   return (

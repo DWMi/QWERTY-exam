@@ -73,7 +73,6 @@ const AdminUser = (props) => {
       setIsAdmin("");
       setMain("");
       router.push("/admin/users");
-      console.log(response);
     } catch (error) {
       console.log(error.response.data);
     }
@@ -173,7 +172,7 @@ const AdminUser = (props) => {
           </div>
           <div className={styles.AdminProductRowSingleElement}>
             {" "}
-            <h3 for="category">Is admin:</h3>
+            <h3 htmlFor="category">Is admin:</h3>
             <select
               {...register("isAdmin", {
                 required: false,
@@ -181,7 +180,6 @@ const AdminUser = (props) => {
               value={isAdmin}
               onChange={(event) => {
                 setMain(event.target.value);
-                console.log(event.target.value);
                 {
                   event.target.value === "true"
                     ? setIsAdmin(true)

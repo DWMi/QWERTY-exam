@@ -25,7 +25,6 @@ export default function successPage() {
   const URL = sessionId ? `/api/stripe/${sessionId}` : null;
   const { data, error } = useSWR(URL, fetcher);
 
-  console.log(data?.order);
 
   if (data?.order == undefined) {
     return (
@@ -106,7 +105,7 @@ export default function successPage() {
               <TableBody>
                 {data?.order.orderItems.map((item) => {
                   return (
-                    <TableRow>
+                    <TableRow key={item._id}>
                       <TableCell>{item.product_name}</TableCell>
                       <TableCell align="right">{item.unit_price}:-</TableCell>
                       <TableCell align="right">{item.qty}</TableCell>
@@ -186,7 +185,7 @@ export default function successPage() {
           </div>
           {data?.order.orderItems.map((item) => {
             return (
-              <div className={s.orderMQCon}>
+              <div className={s.orderMQCon} key={item._id}>
                 <span>
                   <div>
                     <Image

@@ -52,7 +52,7 @@ const Header = () => {
             <Menu.Items className={style.MenuItems}>
               {data &&
                 data.map((cat) => (
-                  <>
+                  <div key={cat._id}>
                     <Menu.Item>
                       <DropdownLink
                         className="dropdown-link"
@@ -65,7 +65,7 @@ const Header = () => {
 
                     {cat.brands &&
                       cat.brands.map((brand) => (
-                        <Menu.Item>
+                        <Menu.Item key={brand._id}>
                           <DropdownLink
                             className="dropdown-link"
                             href={`/${brand.brandName}`}
@@ -77,7 +77,7 @@ const Header = () => {
                           </DropdownLink>
                         </Menu.Item>
                       ))}
-                  </>
+                  </div>
                 ))}
             </Menu.Items>
           </Menu>

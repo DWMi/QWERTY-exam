@@ -13,7 +13,6 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function CategoryPage({ products }) {
   const router = useRouter();
-  console.log(products);
 
   return (
     <>
@@ -36,7 +35,7 @@ export default function CategoryPage({ products }) {
         <div className={s.container}>
           {products &&
             products.map((prod) => {
-              return <ProductCard prod={prod} />;
+              return <ProductCard key={prod._id} prod={prod} />;
             })}
         </div>
       </div>

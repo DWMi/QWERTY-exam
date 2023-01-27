@@ -14,7 +14,7 @@ import Button from "@mui/material/Button";
 import { useSession } from "next-auth/react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { BsFillTrashFill } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import s from "../../styles/ProductPage.module.css";
 import { loadStripe } from "@stripe/stripe-js";
 import { useMediaQuery } from "@mui/material";
@@ -101,7 +101,7 @@ export default function checkoutPage() {
                     <TableBody>
                       {cartItems &&
                         cartItems.map((item) => (
-                          <>
+                          <Fragment key={item._id}>
                             <TableRow
                               key={item.id}
                               sx={{
@@ -208,7 +208,7 @@ export default function checkoutPage() {
                                 />
                               </TableCell>
                             </TableRow>
-                          </>
+                          </Fragment>
                         ))}
                     </TableBody>
                   </Table>
