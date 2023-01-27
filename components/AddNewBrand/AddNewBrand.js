@@ -66,7 +66,6 @@ const AddNewBrand = (props) => {
         method: "POST",
         body: formData,
       }).then((r) => r.json());
-      console.log(imageResponse);
       const response = await axios.post("/api/admin/addNewBrand", {
         name: name,
         category: category,
@@ -80,7 +79,6 @@ const AddNewBrand = (props) => {
       setMain("");
       props.setOpenBrand(false);
       router.push("/admin/products");
-      console.log(response);
     } catch (err) {
       console.log(getError(err));
     }
@@ -120,7 +118,7 @@ const AddNewBrand = (props) => {
           </div>
           <div className={styles.AdminProductRowSingleElement}>
             {" "}
-            <h3 for="category">Choose a category:</h3>
+            <h3 htmlFor="category">Choose a category:</h3>
             <select
               {...register("category", {
                 required: false,

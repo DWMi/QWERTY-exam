@@ -67,7 +67,6 @@
   .bm-overlay {
     background-color: transparent!important;
   }
-/* styling next link component so that will be a column list of links*/
   .bm-item-list a {
     display: flex;
     flex-direction: column;

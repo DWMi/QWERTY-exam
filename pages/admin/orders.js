@@ -32,7 +32,10 @@ export default function Products({ orders }) {
       //make unauthorized page later
     }
   }, []);
+  if(!session?.user.isAdmin){
 
+    return <div className={styles.AdminDashboardContainer}><h1>401 Not Authorized</h1> </div>
+  }
   const [selectedOrder, setSelectedOrder] = React.useState("");
   const [open, setOpen] = React.useState(false);
 
@@ -72,7 +75,7 @@ export default function Products({ orders }) {
             {orders &&
               orders.map((order) => {
                 return (
-                  <div className={styles.AdminProductRow}>
+                  <div className={styles.AdminProductRow} key={order._id}>
                     <div className={styles.AdminUserRowSingleElement}>
                       <h3 style={{ textTransform: "uppercase" }}>
                         {order.orderNumber}

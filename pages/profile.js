@@ -30,15 +30,15 @@ export default function Profile({ orders }) {
       userOrders.push(order);
     }
   }
-  console.log(userOrders);
   const router = useRouter();
 
-  /* useEffect(() => {
-    if (!session?.user.isAdmin) {
+  useEffect(() => {
+    if (!session) {
       router.push("/");
+
       //make unauthorized page later
     }
-  }, []); */
+  }, []);
 
   const [selectedOrder, setSelectedOrder] = React.useState("");
   const [open, setOpen] = React.useState(false);
@@ -54,8 +54,6 @@ export default function Profile({ orders }) {
   };
   const isTabletOrPhone = useMediaQuery("(max-width:819px)");
 
-  console.log(session?.user);
-
   return (
     <>
       <Head>
@@ -64,53 +62,62 @@ export default function Profile({ orders }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <div className={s.centerContainer}>
-        <div className={s.containerUser}>
-          <h1 className={s.title}>Your info</h1>
-          <div className={s.infoContainer}>
-            <h1>
-              Name: {session?.user.firstName} {session?.user.lastName}
-            </h1>
-            <h1>Email: {session?.user.email}</h1>
-            <h1>Address: {session?.user.address}</h1>
-            <br />
-            <br />
-            <h1 style={{ textAlign: "center", marginBottom: "10px" }}>
-              To update your information, please contact us via email at <br />
-              <a href="mailto:info.qwertykeyboards@gmail.com">
-                info.qwertykeyboards@gmail.com
-              </a>{" "}
-            </h1>
+      {session ? (
+        <>
+          <div className={s.centerContainer}>
+            <div className={s.containerUser}>
+              <h1 className={s.title}>Your info</h1>
+              <div className={s.infoContainer}>
+                <h1>
+                  Name: {session?.user.firstName} {session?.user.lastName}
+                </h1>
+                <h1>Email: {session?.user.email}</h1>
+                <h1>Address: {session?.user.address}</h1>
+                <br />
+                <br />
+                <h1 style={{ textAlign: "center", marginBottom: "10px" }}>
+                  To update your information, please contact us via email at{" "}
+                  <br />
+                  <a href="mailto:info.qwertykeyboards@gmail.com">
+                    info.qwertykeyboards@gmail.com
+                  </a>{" "}
+                </h1>
+              </div>
+            </div>
+            <div className={s.ordersCont}>
+              <h1 className={s.title}>Your orders</h1>
+              <div className={s.container}>
+                {userOrders.length < 1 ? (
+                  <h1 className={s.title2}>You haven't placed any order yet</h1>
+                ) : (
+                  userOrders.map((order) => {
+                    return (
+                      <div
+                        key={order._id}
+                        className={s.orderContainer}
+                        onClick={() => handleOpen(order)}
+                      >
+                        <h1>Order #</h1>
+                        {order.orderNumber}
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            </div>
           </div>
+          <ProfileOrder
+            order={selectedOrder}
+            handleClose={handleClose}
+            open={open}
+            setOpen={setOpen}
+          ></ProfileOrder>
+        </>
+      ) : (
+        <div className={s.centerContainer}>
+          <h1>401 Not Authorized</h1>
         </div>
-        <div className={s.ordersCont}>
-          <h1 className={s.title}>Your orders</h1>
-          <div className={s.container}>
-            {userOrders.length < 1 ? (
-              <h1 className={s.title}>You haven't placed any order yet</h1>
-            ) : (
-              userOrders.map((order) => {
-                return (
-                  <div
-                    className={s.orderContainer}
-                    onClick={() => handleOpen(order)}
-                  >
-                    <h1>Order #</h1>
-                    {order.orderNumber}
-                  </div>
-                );
-              })
-            )}
-          </div>
-        </div>
-      </div>
-      <ProfileOrder
-        order={selectedOrder}
-        handleClose={handleClose}
-        open={open}
-        setOpen={setOpen}
-      ></ProfileOrder>
+      )}
     </>
   );
 }

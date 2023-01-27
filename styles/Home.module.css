@@ -27,7 +27,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* padding: 0px 160px; */
   margin-top: 30px;
 }
 
@@ -35,9 +34,6 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  /* display: flex;
-    flex-direction: column; */
-  /* padding: 0px 370px; */
 }
 
 .brandsCon {
@@ -84,7 +80,6 @@
   position: relative;
   width: 80%;
   height: 100%;
-  /* object-fit: fill; */
 }
 
 .promoInfoBox {
@@ -122,8 +117,6 @@
 
 .bestSellerItem {
   width: 100%;
-  /* display: grid;
-    grid-template-columns: repeat(8, 1fr); */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -133,7 +126,6 @@
 }
 
 .bsPicCon {
-  /* grid-column: span 2; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -180,7 +172,7 @@
   width: 100%;
   margin: 20px;
 }
-.contactBtn {
+.contactBtn, #rcc-confirm-button{
   font-size: 11px;
   padding: 10px 25px;
   background-color: black;
@@ -189,7 +181,7 @@
   transition: all 200ms ease-in-out;
 }
 
-.contactBtn:hover {
+.contactBtn:hover, #rcc-confirm-button:hover{
   scale: 1.1;
   border: 1px solid white;
   box-shadow: 10px 10px black;
@@ -269,12 +261,7 @@
     text-align: center;
   }
 }
-/* 
-@media screen and (max-width: 600px) {
-  .infoBox {
-    width: 80%;
-  }
-} */
+
 
 @media screen and (max-width: 600px) {
   .bannerText {

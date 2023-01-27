@@ -29,7 +29,6 @@ const AdminOrder = (props) => {
   const [main, setMain] = React.useState("");
 
   const [isSent, setIsSent] = React.useState("");
-  console.log(props.order);
 
   useEffect(() => {
     //hello
@@ -49,7 +48,6 @@ const AdminOrder = (props) => {
       setMain("");
       props.setOpen(false);
       router.push("/admin/orders");
-      console.log(response);
     } catch (err) {
       console.log(getError(err));
     }

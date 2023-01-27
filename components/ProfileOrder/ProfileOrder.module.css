@@ -65,7 +65,7 @@
 .AdminProductRowSingleElement {
   margin: 10px;
   text-align: center;
-  width: 70%;
+  width: 100%;
   border: 1px solid black;
   display: flex;
   flex-direction: row;
@@ -112,7 +112,6 @@
   }
   .AdminProductRowSingleElement {
     padding: 10px;
-    height: 70px;
   }
 }
 
@@ -125,19 +124,20 @@
   }
   .AdminProductRowSingleElement {
     padding: 10px;
-    height: 70px;
   }
 }
 
 @media screen and (max-width: 750px) {
   .AdminProductRowSingleElement {
     flex-direction: column;
-    justify-content: none;
+    justify-content: unset;
     gap: 0;
-    height: 20%;
     font-size: small;
   }
-
+  .linkToProduct{
+    text-align: start;
+    white-space: nowrap;
+  }
   .box {
     justify-content: unset !important;
   }

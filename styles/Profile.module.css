@@ -87,6 +87,12 @@
 .headerText {
   font-size: 60px;
 }
+
+.title2{
+  margin: 10px;
+  font-size: 25px;
+  text-align: center;
+}
 @media screen and (max-width: 999px) {
   .centerContainer {
     margin: 0;
@@ -117,7 +123,7 @@
   }
   .infoContainer {
     padding: 10px;
-    height: 250px;
+    height: 270px;
     width: 60%;
   }
 }

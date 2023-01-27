@@ -9,12 +9,19 @@ import Category from "../models/Category";
 import db from "../utils/db";
 import ProductCard from "../components/ProductCard/ProductCard";
 import Head from "next/head";
+import { Fragment } from "react";
 
 const Landing = ({ products, categories }) => {
   return (
     <>
       <Head>
         <title>QWERTY - Home</title>
+        <meta name="description" content="QWERTY - Your one-stop shop for custom built mechanical keyboards, accessories, and more. We specialize in Keychron, Ducky, Yunzii, Varmilo and other mechanical keyboard brands."/>
+        <meta name="keywords" content="mechanical keyboard, custom keyboard, Keychron, Ducky, Yunzii, Varmilo, keyboard accessories"/>
+        <meta name="robots" content="index, follow"/>
+        <meta name="author" content="QWERTY"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.bannerCon}>
         <div style={{ height: "100%", height: "40%" }}>
@@ -62,11 +69,11 @@ const Landing = ({ products, categories }) => {
           <div className={styles.brandsCon}>
             {categories &&
               categories.map((cat) => (
-                <>
+                <Fragment key={cat._id}>
                   {cat.brands &&
                     cat.brands.map((brand) => {
                       return (
-                        <>
+                        <Fragment key={brand._id}>
                           {brand.img ? (
                             <Link
                               href={`/${brand.brandName}`}
@@ -74,7 +81,7 @@ const Landing = ({ products, categories }) => {
                             >
                               <Image
                                 priority
-                                eager
+                                
                                 src={brand.img}
                                 className={styles.brandPic}
                                 alt="brand name"
@@ -86,10 +93,10 @@ const Landing = ({ products, categories }) => {
                               </div>
                             </Link>
                           ) : null}
-                        </>
+                        </Fragment>
                       );
                     })}
-                </>
+                </Fragment>
               ))}
           </div>
           <div className={styles.promoBanCon}>
@@ -125,7 +132,7 @@ const Landing = ({ products, categories }) => {
 
           <div className={styles.bestSellerItem}>
             {products.slice(2, 6).map((prod) => {
-              return <ProductCard prod={prod} />;
+              return <ProductCard key={prod._id} prod={prod} />;
             })}
           </div>
           <div className={styles.contactUsBanCon}>

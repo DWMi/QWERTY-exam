@@ -49,7 +49,7 @@ const HamburgerMenu = (props) => {
             <div style={{ fontStyle: "10px", color: "#FFFFFF" }}>PRODUCTS:</div>
             {data &&
               data.map((cat) => (
-                <>
+                <div key={cat._id}>
                   <Link
                     style={{
                       marginLeft: "10px",
@@ -58,10 +58,10 @@ const HamburgerMenu = (props) => {
                       fontWeight: "bold",
                     }}
                     href={`/category/${cat.name}`}
-                    key={cat._id}
+                    
                     onClick={closeSideBar}
                   >
-                    <h3 key={cat.name}>All {cat.name}</h3>
+                    <h3>All {cat.name}</h3>
                   </Link>
                   {cat.brands &&
                     cat.brands.map((brand) => (
@@ -73,7 +73,7 @@ const HamburgerMenu = (props) => {
                         {brand.brandName}
                       </Link>
                     ))}
-                </>
+                </div>
               ))}
           </div>
           <Link

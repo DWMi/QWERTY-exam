@@ -43,7 +43,6 @@ const DeleteProduct = (props) => {
       setMain("");
       props.setOpenDelete(false);
       router.push("/admin/products");
-      console.log(response);
     } catch (err) {
       console.log(getError(err));
     }

@@ -14,13 +14,3 @@ export default async function handler(req, res) {
   res.status(200).json(products);
 }
 
-const userObj = [
-  {
-    firstName: "Toni",
-    lastName: "Tonelli",
-    email: "test@test.com",
-    password: bcrypt.hashSync("12345"),
-    address: "123 holly road, San Francisco, CA, USA",
-    isAdmin: false,
-  },
-];

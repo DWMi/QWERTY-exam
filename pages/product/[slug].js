@@ -35,7 +35,6 @@ export default function SingleProduct({ product }) {
   const { addItem } = useCart();
   const { items } = useCart();
   const { updateItemQuantity } = useCart();
-  console.log(items);
 
   const addToCart = () => {
     const foundProduct = items.find(
@@ -77,6 +76,7 @@ export default function SingleProduct({ product }) {
         <div className={s.container}>
           <div className={s.imgMainContainer}>
             <Image
+              alt={product.name}
               src={imgSrc1}
               width={1000}
               height={1000}
@@ -85,6 +85,7 @@ export default function SingleProduct({ product }) {
 
             {product.img2 ? (
               <Image
+                alt={product.name}
                 src={imgSrc2}
                 width={1000}
                 height={1000}
@@ -106,7 +107,7 @@ export default function SingleProduct({ product }) {
             ) : null}
           </div>
           <div className={s.productInfoDiv}>
-            <h3 style={{ fontSize: "50px", margin: "0" }}>{product.name}</h3>
+            <h3 style={{ fontSize: "40px", margin: "0" }}>{product.name}</h3>
             <h4 style={{ fontSize: "30px", margin: "0" }}>
               {product.price} SEK
             </h4>
@@ -129,6 +130,7 @@ export default function SingleProduct({ product }) {
                       product.switches.map((keySwitch) => {
                         return (
                           <MenuItem
+                          key={keySwitch}
                             value={keySwitch}
                             style={{
                               paddingRight: "0",
