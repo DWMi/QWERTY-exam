@@ -37,6 +37,7 @@ const AddNewProd = (props) => {
   const [imageTwo, setImageTwo] = React.useState("");
 
   const [name, setName] = React.useState("");
+  const [description, setDescription] = React.useState("");
   const [brand, setBrand] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [qty, setQty] = React.useState("");
@@ -58,6 +59,7 @@ const AddNewProd = (props) => {
     _id,
     name,
     brand,
+    description,
     img1,
     img2,
     price,
@@ -92,6 +94,7 @@ const AddNewProd = (props) => {
         const response = await axios.post("/api/admin/addNewProduct", {
           name: name,
           brand: brand,
+          description: description,
           img1: imageResponseOne.secure_url,
           img2: image2slug,
           price: price,
@@ -104,6 +107,7 @@ const AddNewProd = (props) => {
           {
             name: name,
             brand: brand,
+            description: description,
             img1: imageResponseOne.secure_url,
             img2: image2slug,
             price: price,
@@ -163,8 +167,26 @@ const AddNewProd = (props) => {
             ></input>
           </div>
           <div className={styles.AdminProductRowSingleElement}>
-            <h3>Brand:</h3>
+            <h3>Description:</h3>
             <input
+              {...register("description", {
+                required: false,
+              })}
+              value={description}
+              onChange={(event) => {
+                setMain(event.target.value);
+                setDescription(event.target.value);
+              }}
+              className={styles.LoginEmailInput}
+              type="text"
+              id="description"
+              placeholder="Add description"
+              autoFocus
+            ></input>
+          </div>
+          <div className={styles.AdminProductRowSingleElement}>
+            <h3>Brand:</h3>
+            <select
               {...register("brand", {
                 required: false,
               })}
@@ -178,7 +200,21 @@ const AddNewProd = (props) => {
               id="brand"
               placeholder="Add brand"
               autoFocus
-            ></input>
+            >
+              <option value="">Select brand</option>;
+              {props.category.map((cat) => {
+                {
+                  cat.brands &&
+                    cat.brands.map((brand) => {
+                      return (
+                        <div>
+                          <p value="">{brand.brandName}</p>;
+                        </div>
+                      );
+                    });
+                }
+              })}
+            </select>
           </div>
           <div className={styles.AdminProductRowSingleElement}>
             {" "}
