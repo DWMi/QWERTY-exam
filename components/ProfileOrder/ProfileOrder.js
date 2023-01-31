@@ -104,6 +104,7 @@ const ProfileOrder = (props) => {
                 props.order.orderItems.map((items) => {
                   return (
                     <Link
+
                       className={styles.linkToProduct}
                       href={`/product/${items.product_name}`}
                     >
