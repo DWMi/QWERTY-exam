@@ -107,7 +107,7 @@
     width: 90% !important;
     overflow-y: auto !important;
     align-items: center;
-    justify-content: center;
+    justify-content: unset !important;
     gap: 0 !important;
   }
   .AdminProductRowSingleElement {
