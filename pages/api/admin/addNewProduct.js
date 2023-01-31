@@ -6,11 +6,13 @@ async function handler(req, res) {
     return;
   }
 
-  const { _id, name, brand, img1, img2, price, qty, category } = req.body;
+  const { _id, name, description, brand, img1, img2, price, qty, category } =
+    req.body;
 
   const newProd = {
     name: name,
     brand: brand,
+    description: description,
     price: price,
     img1: img1,
     img2: img2,
@@ -22,7 +24,6 @@ async function handler(req, res) {
   const updateProd = await Product.create(newProd);
   db.disconnect();
   res.json(req.body);
-
 }
 
 export default handler;

@@ -18,21 +18,33 @@ import DeleteProduct from "../../components/DeleteProduct/DeleteProduct.js";
 import AddNewBrand from "../../components/AddNewBrand/AddNewBrand";
 import { useMediaQuery } from "@mui/material";
 import Head from "next/head.js";
+import useSWR from "swr";
+import fetcher from "../../utils/fetcher.js";
 
 export async function getServerSideProps(context) {
   const categoryName = context.query.categoryName;
   await db.connect();
   const products = await Product.find().lean();
+  db.disconnect();
   return {
     props: {
       products: products.map(db.convertDocToObj),
     },
   };
-  db.disconnect();
 }
 
 export default function Products({ products }) {
+  const [selectedProduct, setSelectedProduct] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+  const [openAdd, setOpenAdd] = React.useState(false);
+  const [openBrand, setOpenBrand] = React.useState(false);
+  const [openDelete, setOpenDelete] = React.useState(false);
+  const isTabletOrPhone = useMediaQuery("(max-width:819px)");
+
   const { data: session } = useSession();
+  const { data, error } = useSWR("/api/categories/get-all-categories", fetcher);
+  console.log(data);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -41,16 +53,14 @@ export default function Products({ products }) {
       //make unauthorized page later
     }
   }, []);
-  if(!session?.user.isAdmin){
 
-    return <div className={styles.AdminDashboardContainer}><h1>401 Not Authorized</h1> </div>
+  if (!session?.user.isAdmin) {
+    return (
+      <div className={styles.AdminDashboardContainer}>
+        <h1>401 Not Authorized</h1>{" "}
+      </div>
+    );
   }
-
-  const [selectedProduct, setSelectedProduct] = React.useState("");
-  const [open, setOpen] = React.useState(false);
-  const [openAdd, setOpenAdd] = React.useState(false);
-  const [openBrand, setOpenBrand] = React.useState(false);
-  const [openDelete, setOpenDelete] = React.useState(false);
 
   const handleOpen = (prod) => {
     setOpen(true);
@@ -77,7 +87,6 @@ export default function Products({ products }) {
     setOpenDelete(false);
     setOpenBrand(false);
   };
-  const isTabletOrPhone = useMediaQuery("(max-width:819px)");
 
   return (
     <>
@@ -159,6 +168,7 @@ export default function Products({ products }) {
             setOpen={setOpen}
           ></AdminProduct>
           <AddNewProduct
+            category={data}
             handleClose={handleClose}
             openAdd={openAdd}
             setOpenAdd={setOpenAdd}
