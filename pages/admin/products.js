@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout.js";
 import Link from "next/link";
 import styles from "../../styles/Admin.module.css";
@@ -20,6 +20,7 @@ import { useMediaQuery } from "@mui/material";
 import Head from "next/head.js";
 import useSWR from "swr";
 import fetcher from "../../utils/fetcher.js";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export async function getServerSideProps(context) {
   const categoryName = context.query.categoryName;
@@ -43,23 +44,23 @@ export default function Products({ products }) {
 
   const { data: session } = useSession();
   const { data, error } = useSWR("/api/categories/get-all-categories", fetcher);
-  console.log(data);
 
   const router = useRouter();
 
+  const [sessionData, setSessionData] = useState(null);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    if (!session?.user.isAdmin) {
-      router.push("/");
-      //make unauthorized page later
+    setSessionData(session);
+    if (!sessionData) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    } else {
+      setLoading(false);
     }
-  }, []);
-
-  if (!session?.user.isAdmin) {
-    return (
-      <div className={styles.AdminDashboardContainer}>
-        <h1>401 Not Authorized</h1>{" "}
-      </div>
-    );
+  }, [session]);
+  if (!sessionData && loading === false) {
+    router.push("/");
   }
 
   const handleOpen = (prod) => {
@@ -97,95 +98,106 @@ export default function Products({ products }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {!isTabletOrPhone ? (
-        <>
+        loading ? (
           <div className={styles.AdminDashboardContainer}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-end",
-                width: "80%",
-                gap: "20px",
-              }}
-            >
-              <button
-                className={styles.AdminButton}
-                type="submit"
-                onClick={() => handleOpenBrand()}
-              >
-                Add Brand
-              </button>
-              <button
-                className={styles.AdminButton}
-                type="submit"
-                onClick={() => handleOpenNew()}
-              >
-                Add product
-              </button>
-            </div>
-            <AdminRow></AdminRow>
-            {products &&
-              products.map((prod) => {
-                return (
-                  <div className={styles.AdminProductRow} key={prod._id}>
-                    <div className={styles.AdminProductRowSingleElement}>
-                      <h3 style={{ textTransform: "uppercase" }}>
-                        {prod._id.slice(-5)}
-                      </h3>
-                    </div>
-                    <div className={styles.AdminProductRowSingleElement}>
-                      <h3>{prod.name}</h3>
-                    </div>
-                    <div className={styles.AdminProductRowSingleElement}>
-                      <h3>{prod.qty}</h3>
-                    </div>
-                    <div className={styles.AdminProductRowSingleElement}>
-                      <h3>{prod.category}</h3>
-                    </div>
-                    <div className={styles.AdminProductRowSingleElement}>
-                      <h3>{prod.brand}</h3>
-                    </div>
-                    <div className={styles.AdminProductRowSingleElementIcon}>
-                      <BsFillGearFill
-                        style={{ cursor: "pointer" }}
-                        onClick={() => handleOpen(prod)}
-                      ></BsFillGearFill>
-                    </div>
-                    <div className={styles.AdminProductRowSingleElementIcon}>
-                      <BsFillTrashFill
-                        onClick={() => handleOpenDelete(prod)}
-                        style={{ color: "red", cursor: "pointer" }}
-                      ></BsFillTrashFill>
-                    </div>
-                  </div>
-                );
-              })}
+            <CircularProgress color="inherit" />
           </div>
-          <AdminProduct
-            product={selectedProduct}
-            handleClose={handleClose}
-            open={open}
-            setOpen={setOpen}
-          ></AdminProduct>
-          <AddNewProduct
-            category={data}
-            handleClose={handleClose}
-            openAdd={openAdd}
-            setOpenAdd={setOpenAdd}
-          ></AddNewProduct>
-          <AddNewBrand
-            handleClose={handleClose}
-            openBrand={openBrand}
-            setOpenBrand={setOpenBrand}
-          ></AddNewBrand>
-          <DeleteProduct
-            product={selectedProduct}
-            handleClose={handleClose}
-            openDelete={openDelete}
-            setOpenDelete={setOpenDelete}
-          ></DeleteProduct>
-          ;
-        </>
+        ) : !sessionData ? (
+          <div className={styles.AdminDashboardContainer}>
+            <h1>401 - Not authorized user!</h1>
+          </div>
+        ) : (
+          <>
+            <div className={styles.AdminDashboardContainer}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "flex-end",
+                  width: "80%",
+                  gap: "20px",
+                }}
+              >
+                <button
+                  className={styles.AdminButton}
+                  type="submit"
+                  onClick={() => handleOpenBrand()}
+                >
+                  Add Brand
+                </button>
+                <button
+                  className={styles.AdminButton}
+                  type="submit"
+                  onClick={() => handleOpenNew()}
+                >
+                  Add product
+                </button>
+              </div>
+              <AdminRow></AdminRow>
+              {products &&
+                products.map((prod) => {
+                  return (
+                    <div className={styles.AdminProductRow} key={prod._id}>
+                      <div className={styles.AdminProductRowSingleElement}>
+                        <h3 style={{ textTransform: "uppercase" }}>
+                          {prod._id.slice(-5)}
+                        </h3>
+                      </div>
+                      <div className={styles.AdminProductRowSingleElement}>
+                        <h3>{prod.name}</h3>
+                      </div>
+                      <div className={styles.AdminProductRowSingleElement}>
+                        <h3>{prod.qty}</h3>
+                      </div>
+                      <div className={styles.AdminProductRowSingleElement}>
+                        <h3>{prod.category}</h3>
+                      </div>
+                      <div className={styles.AdminProductRowSingleElement}>
+                        <h3>{prod.brand}</h3>
+                      </div>
+                      <div className={styles.AdminProductRowSingleElementIcon}>
+                        <BsFillGearFill
+                          style={{ cursor: "pointer" }}
+                          onClick={() => handleOpen(prod)}
+                        ></BsFillGearFill>
+                      </div>
+                      <div className={styles.AdminProductRowSingleElementIcon}>
+                        <BsFillTrashFill
+                          onClick={() => handleOpenDelete(prod)}
+                          style={{ color: "red", cursor: "pointer" }}
+                        ></BsFillTrashFill>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+            <AdminProduct
+              category={data}
+              product={selectedProduct}
+              handleClose={handleClose}
+              open={open}
+              setOpen={setOpen}
+            ></AdminProduct>
+            <AddNewProduct
+              category={data}
+              handleClose={handleClose}
+              openAdd={openAdd}
+              setOpenAdd={setOpenAdd}
+            ></AddNewProduct>
+            <AddNewBrand
+              handleClose={handleClose}
+              openBrand={openBrand}
+              setOpenBrand={setOpenBrand}
+            ></AddNewBrand>
+            <DeleteProduct
+              product={selectedProduct}
+              handleClose={handleClose}
+              openDelete={openDelete}
+              setOpenDelete={setOpenDelete}
+            ></DeleteProduct>
+            ;
+          </>
+        )
       ) : (
         <div className={styles.AdminDashboardContainer}>
           <h1> Not supported on mobile</h1>

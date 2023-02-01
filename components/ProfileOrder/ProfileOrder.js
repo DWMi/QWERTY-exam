@@ -33,7 +33,6 @@ const ProfileOrder = (props) => {
   const [isSent, setIsSent] = React.useState("");
 
   useEffect(() => {
-    //hello
     router.push("/profile");
     setIsSent("");
     setMain("");
@@ -103,15 +102,23 @@ const ProfileOrder = (props) => {
             <div>
               {props.order.orderItems &&
                 props.order.orderItems.map((items) => {
+                  console.log(items);
                   return (
                     <Link
                       key={nanoid()}
                       className={styles.linkToProduct}
                       href={`/product/${items.product_name}`}
                     >
-                      <h3 className={styles.textOne}>
-                        {items.product_name}, {items.unit_price} SEK
-                      </h3>
+                      {items.qty > 1 ? (
+                        <h3 className={styles.textOne}>
+                          {items.qty}x {items.product_name}, {items.unit_price}{" "}
+                          SEK
+                        </h3>
+                      ) : (
+                        <h3 className={styles.textOne}>
+                          {items.product_name}, {items.unit_price} SEK
+                        </h3>
+                      )}
                       <h3 className={styles.textTwo}>Go to product</h3>
                     </Link>
                   );

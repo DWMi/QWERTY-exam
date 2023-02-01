@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import useSWR from "swr";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import styles from "./DeleteProduct.module.css";
+import styles from "./DeleteUser.module.css";
 import Link from "next/link";
 import { getError } from "../../utils/error";
 import axios from "axios";
@@ -21,7 +21,7 @@ const DeleteProduct = (props) => {
   const [category, setCategory] = React.useState("");
 
   useEffect(() => {
-    router.push("/admin/products");
+    router.push("/admin/users");
     setName("");
     setPrice("");
     setQty("");
@@ -32,8 +32,8 @@ const DeleteProduct = (props) => {
   const { handleSubmit, register, getValues } = useForm();
   const submitHandler = async ({ _id }) => {
     try {
-      const response = await axios.post("/api/admin/deleteProduct", {
-        _id: props.product._id,
+      const response = await axios.post("/api/admin/deleteUser", {
+        _id: props.user._id,
       });
       setName("");
       setPrice("");
@@ -41,7 +41,7 @@ const DeleteProduct = (props) => {
       setCategory("");
       setMain("");
       props.setOpenDelete(false);
-      router.push("/admin/products");
+      router.push("/admin/users");
     } catch (err) {
       console.log(getError(err));
     }

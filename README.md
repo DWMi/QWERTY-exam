@@ -1,38 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies and run the development server:
 
 ```bash
+npm install
 npm run dev
 # or
+yarn install
 yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Database access is private due to security reasons! Contact us for getting a private access.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+You will need a .env file with the following values:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+MONGO_URL=<!-- Insert_Private_access_URL -->
+NEXTAUTH_URL='http://localhost:3000/' (in local) <!-- your domain for deployed version -->
+NEXTAUTH_SECRET=<!-- Insert_Private_access_SECRET -->
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=<!-- Insert_PUBLIC_STRIPE_PUBLISHABLE_KEY -->
+STRIPE_SECRET_KEY=<!-- Insert_STRIPE_SECRET_KEY -->
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+EMAIL=<!-- Your email address -->
+EMAIL_PASS=<!-- Your gmail app password -->
 
-## Learn More
+## Check the log.md for the development weekly steps
 
-To learn more about Next.js, take a look at the following resources:
+## Requirements
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Node.js v14+
+MongoDB v4.2+
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## For more info contact us on GitHub!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-TO CHANGE THE PROMO CODE, WE WOULD NEED TO DO IT FROM THE STRIPE ADMIN DASHBOARD.
+Ciao!

@@ -160,12 +160,16 @@ const Header = () => {
         </div>
       ) : (
         <div style={{ display: "flex", width: "90%" }}>
-          <HamburgerMenu
-            totalCartItems={totalCartItems}
-            data={data}
-          />
+          <HamburgerMenu totalCartItems={totalCartItems} data={data} />
           <Link className={style.cartIconMq} href="/checkout">
-            <div style={{ display: "flex", flexDirection: "row", justifyContent:'center', alignItems: 'center' }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <AiOutlineShoppingCart
                 style={{
                   stroke: "black",
@@ -198,7 +202,6 @@ const Header = () => {
             </div>
           </Link>
         </div>
-   
       )}
     </div>
   );

@@ -42,7 +42,6 @@ const AddNewBrand = (props) => {
   const [category, setCategory] = React.useState("");
 
   useEffect(() => {
-    //hello
     router.push("/admin/products");
     setName("");
     setBrand("");

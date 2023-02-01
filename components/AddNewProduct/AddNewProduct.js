@@ -44,7 +44,6 @@ const AddNewProd = (props) => {
   const [category, setCategory] = React.useState("");
 
   useEffect(() => {
-    //hello
     router.push("/admin/products");
     setName("");
     setBrand("");
@@ -202,18 +201,19 @@ const AddNewProd = (props) => {
               autoFocus
             >
               <option value="">Select brand</option>;
-              {props.category.map((cat) => {
-                {
-                  cat.brands &&
+              {props.category &&
+                props.category.map((cat) => {
+                  return (
+                    cat.brands &&
                     cat.brands.map((brand) => {
                       return (
-                        <div>
-                          <p value="">{brand.brandName}</p>;
-                        </div>
+                        <option key={brand._id} value={brand.brandName}>
+                          {brand.brandName}
+                        </option>
                       );
-                    });
-                }
-              })}
+                    })
+                  );
+                })}
             </select>
           </div>
           <div className={styles.AdminProductRowSingleElement}>

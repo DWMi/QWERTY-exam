@@ -38,7 +38,6 @@ const AdminUser = (props) => {
   const [isAdmin, setIsAdmin] = React.useState();
 
   useEffect(() => {
-    //hello
     router.push("/admin/users");
     setFirstName("");
     setLastName("");
@@ -188,16 +187,15 @@ const AdminUser = (props) => {
                 }
               }}
               className={styles.LoginEmailInput}
-              placeholder={props.user.isAdmin}
               type="text"
               id="isAdmin"
               autoFocus
             >
-              <option value="" selected disabled hidden>
+              <option value="" disabled hidden>
                 Select here
               </option>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {main.length === 0 ? (
