@@ -45,6 +45,7 @@
   gap: 5px;
   padding: 10px;
   transition: all 200ms ease-in-out;
+  white-space: nowrap;
 }
 
 .ProductPageButton:hover {
