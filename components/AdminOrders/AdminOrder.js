@@ -32,7 +32,6 @@ const AdminOrder = (props) => {
   const [isSent, setIsSent] = React.useState("");
 
   useEffect(() => {
-    //hello
     router.push("/admin/orders");
     setIsSent("");
     setMain("");
@@ -91,7 +90,7 @@ const AdminOrder = (props) => {
           </div>
           <div className={styles.AdminProductRowSingleElement}>
             {" "}
-            <h3 for="category">Is sent:</h3>
+            <h3 htmlFor="category">Is sent:</h3>
             <select
               {...register("isSent", {
                 required: false,
@@ -106,14 +105,13 @@ const AdminOrder = (props) => {
                 }
               }}
               className={styles.LoginEmailInput}
-              placeholder={props.order.isSent}
               type="text"
               id="isSent"
               autoFocus
             >
               <option value="">Select</option>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {main.length === 0 ? (

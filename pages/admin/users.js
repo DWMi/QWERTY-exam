@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/Admin.module.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -9,37 +9,44 @@ import AdminRow from "../../components/AdminRowUsers/AdminRow.js";
 import AdminUser from "../../components/AdminUser/AdminUser";
 import Head from "next/head.js";
 import { useMediaQuery } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import DeleteUser from "../../components/DeleteUser/DeleteUser.js";
 
 export async function getServerSideProps(context) {
   const categoryName = context.query.categoryName;
   await db.connect();
   const users = await User.find().lean();
+  db.disconnect();
   return {
     props: {
       users: users.map(db.convertDocToObj),
     },
   };
-  db.disconnect();
 }
 
 export default function Products({ users }) {
   const { data: session } = useSession();
   const router = useRouter();
-
-  useEffect(() => {
-    if (!session?.user.isAdmin) {
-      router.push("/");
-      //make unauthorized page later
-    }
-  }, []);
-  if(!session?.user.isAdmin){
-
-    return <div className={styles.AdminDashboardContainer}><h1>401 Not Authorized</h1> </div>
-  }
-
+  const isTabletOrPhone = useMediaQuery("(max-width:819px)");
+  const [sessionData, setSessionData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [selectedUser, setSelectedUser] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const [openDelete, setOpenDelete] = React.useState(false);
+
+  useEffect(() => {
+    setSessionData(session);
+    if (!sessionData) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    } else {
+      setLoading(false);
+    }
+  }, [session]);
+  if (!sessionData && loading === false) {
+    router.push("/");
+  }
 
   const handleOpen = (user) => {
     setOpen(true);
@@ -49,14 +56,13 @@ export default function Products({ users }) {
   const handleClose = () => {
     router.push("/admin/users");
     setOpen(false);
+    setOpenDelete(false);
   };
 
   const handleOpenDelete = (user) => {
     setOpenDelete(true);
     setSelectedUser(user);
   };
-
-  const isTabletOrPhone = useMediaQuery("(max-width:819px)");
 
   return (
     <>
@@ -68,68 +74,86 @@ export default function Products({ users }) {
       </Head>
 
       {!isTabletOrPhone ? (
-        <>
+        loading ? (
           <div className={styles.AdminDashboardContainer}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-end",
-                width: "80%",
-                gap: "20px",
-              }}
-            ></div>
-            <AdminRow></AdminRow>
-            {users &&
-              users.map((user) => {
-                return (
-                  <div className={styles.AdminProductRow} key={user._id}>
-                    <div className={styles.AdminUserRowSingleElement}>
-                      <h3 style={{ textTransform: "uppercase" }}>
-                        {user._id.slice(-5)}
-                      </h3>
-                    </div>
-                    <div className={styles.AdminUserRowSingleElement}>
-                      <h3>
-                        {user.firstName} {user.lastName}
-                      </h3>
-                    </div>
-                    <div className={styles.AdminUserRowSingleElement}>
-                      <h3>{user.email}</h3>
-                    </div>
-                    <div className={styles.AdminUserRowSingleElement}>
-                      <h3>{user.address}</h3>
-                    </div>
-                    <div className={styles.AdminProductRowSingleElementIsAdmin}>
-                      {user.isAdmin === false ? (
-                        <h3 style={{ color: "red" }}>No</h3>
-                      ) : (
-                        <h3 style={{ color: "green" }}>Yes</h3>
-                      )}
-                    </div>
-                    <div className={styles.AdminProductRowSingleElementIcon}>
-                      <BsFillGearFill
-                        style={{ cursor: "pointer" }}
-                        onClick={() => handleOpen(user)}
-                      ></BsFillGearFill>
-                    </div>
-                    <div className={styles.AdminProductRowSingleElementIcon}>
-                      <BsFillTrashFill
-                        onClick={() => handleOpenDelete(user)}
-                        style={{ color: "red", cursor: "pointer" }}
-                      ></BsFillTrashFill>
-                    </div>
-                  </div>
-                );
-              })}
+            <CircularProgress color="inherit" />
           </div>
-          <AdminUser
-            user={selectedUser}
-            handleClose={handleClose}
-            open={open}
-            setOpen={setOpen}
-          ></AdminUser>
-        </>
+        ) : !sessionData ? (
+          <div className={styles.AdminDashboardContainer}>
+            <h1>401 - Not authorized user!</h1>
+          </div>
+        ) : (
+          <>
+            <div className={styles.AdminDashboardContainer}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "flex-end",
+                  width: "80%",
+                  gap: "20px",
+                }}
+              ></div>
+              <AdminRow></AdminRow>
+              {users &&
+                users.map((user) => {
+                  return (
+                    <div className={styles.AdminProductRow} key={user._id}>
+                      <div className={styles.AdminUserRowSingleElement}>
+                        <h3 style={{ textTransform: "uppercase" }}>
+                          {user._id.slice(-5)}
+                        </h3>
+                      </div>
+                      <div className={styles.AdminUserRowSingleElement}>
+                        <h3>
+                          {user.firstName} {user.lastName}
+                        </h3>
+                      </div>
+                      <div className={styles.AdminUserRowSingleElement}>
+                        <h3>{user.email}</h3>
+                      </div>
+                      <div className={styles.AdminUserRowSingleElement}>
+                        <h3>{user.address}</h3>
+                      </div>
+                      <div
+                        className={styles.AdminProductRowSingleElementIsAdmin}
+                      >
+                        {user.isAdmin === false ? (
+                          <h3 style={{ color: "red" }}>No</h3>
+                        ) : (
+                          <h3 style={{ color: "green" }}>Yes</h3>
+                        )}
+                      </div>
+                      <div className={styles.AdminProductRowSingleElementIcon}>
+                        <BsFillGearFill
+                          style={{ cursor: "pointer" }}
+                          onClick={() => handleOpen(user)}
+                        ></BsFillGearFill>
+                      </div>
+                      <div className={styles.AdminProductRowSingleElementIcon}>
+                        <BsFillTrashFill
+                          onClick={() => handleOpenDelete(user)}
+                          style={{ color: "red", cursor: "pointer" }}
+                        ></BsFillTrashFill>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+            <AdminUser
+              user={selectedUser}
+              handleClose={handleClose}
+              open={open}
+              setOpen={setOpen}
+            ></AdminUser>
+            <DeleteUser
+              user={selectedUser}
+              handleClose={handleClose}
+              openDelete={openDelete}
+              setOpenDelete={setOpenDelete}
+            ></DeleteUser>
+          </>
+        )
       ) : (
         <div className={styles.AdminDashboardContainer}>
           <h1> Not supported on mobile</h1>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout.js";
 import Link from "next/link";
 import styles from "../../styles/Admin.module.css";
@@ -9,22 +9,28 @@ import { getError } from "../../utils/error.js";
 import { useRouter } from "next/router";
 import Head from "next/head.js";
 import { useMediaQuery } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Dashboard() {
   const { data: session } = useSession();
   const router = useRouter();
-
-  useEffect(() => {
-    if (!session?.user.isAdmin) {
-      router.push("/");
-      //make unauthorized page later
-    }
-  }, []);
-if(!session?.user.isAdmin){
-
-  return <div className={styles.AdminDashboardContainer}><h1>401 Not Authorized</h1> </div>
-}
   const isTabletOrPhone = useMediaQuery("(max-width:819px)");
+
+  const [sessionData, setSessionData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setSessionData(session);
+    if (!sessionData) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    } else {
+      setLoading(false);
+    }
+  }, [session]);
+  if (!sessionData && loading === false) {
+    router.push("/");
+  }
 
   return (
     <>
@@ -34,33 +40,53 @@ if(!session?.user.isAdmin){
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       {!isTabletOrPhone ? (
-        <div className={styles.AdminDashboardContainer}>
-          <br />
-          <h1 style={{ fontSize: "30px" }}>ADMIN PAGE</h1>
-          <br></br>
-          <div className={styles.AdminDashboardBackToSiteContainer}></div>
-          <div className={styles.AdminDashboardCategoriesContainer}>
-            <Link style={{ width: "100%" }} href={"/admin/orders"}>
-              <button style={{ width: "100%" }} className={styles.AdminButton}>
-                <h1 style={{ fontSize: "20px" }}>Orders</h1>
-              </button>
-            </Link>
-            <Link style={{ width: "100%" }} href={"/admin/products"}>
-              <button style={{ width: "100%" }} className={styles.AdminButton}>
-                <h1 style={{ fontSize: "20px" }}>Products</h1>
-              </button>
-            </Link>
-            <Link style={{ width: "100%" }} href={"/admin/users"}>
-              <button style={{ width: "100%" }} className={styles.AdminButton}>
-                <h1 style={{ fontSize: "20px" }}>Users</h1>
-              </button>
+        loading ? (
+          <div className={styles.AdminDashboardContainer}>
+            <CircularProgress color="inherit" />
+          </div>
+        ) : !sessionData ? (
+          <div className={styles.AdminDashboardContainer}>
+            <h1>401 - Not authorized user!</h1>
+          </div>
+        ) : (
+          <div className={styles.AdminDashboardContainer}>
+            <br />
+            <h1 style={{ fontSize: "30px" }}>ADMIN PAGE</h1>
+            <br></br>
+            <div className={styles.AdminDashboardBackToSiteContainer}></div>
+            <div className={styles.AdminDashboardCategoriesContainer}>
+              <Link style={{ width: "100%" }} href={"/admin/orders"}>
+                <button
+                  style={{ width: "100%" }}
+                  className={styles.AdminButton}
+                >
+                  <h1 style={{ fontSize: "20px" }}>Orders</h1>
+                </button>
+              </Link>
+              <Link style={{ width: "100%" }} href={"/admin/products"}>
+                <button
+                  style={{ width: "100%" }}
+                  className={styles.AdminButton}
+                >
+                  <h1 style={{ fontSize: "20px" }}>Products</h1>
+                </button>
+              </Link>
+              <Link style={{ width: "100%" }} href={"/admin/users"}>
+                <button
+                  style={{ width: "100%" }}
+                  className={styles.AdminButton}
+                >
+                  <h1 style={{ fontSize: "20px" }}>Users</h1>
+                </button>
+              </Link>
+            </div>
+            <Link className={styles.BackToSite} href={"/"}>
+              <h1 style={{ fontSize: "20px" }}>Back to the website</h1>
             </Link>
           </div>
-          <Link className={styles.BackToSite} href={"/"}>
-            <h1 style={{ fontSize: "20px" }}>Back to the website</h1>
-          </Link>
-        </div>
+        )
       ) : (
         <div className={styles.AdminDashboardContainer}>
           <h1> Not supported on mobile</h1>

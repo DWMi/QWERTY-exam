@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/Admin.module.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -9,32 +9,39 @@ import AdminRow from "../../components/AdminRowOrders/AdminRow.js";
 import AdminOrder from "../../components/AdminOrders/AdminOrder";
 import Head from "next/head.js";
 import { useMediaQuery } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export async function getServerSideProps(context) {
   const categoryName = context.query.categoryName;
   await db.connect();
   const orders = await Order.find().lean();
+  db.disconnect();
   return {
     props: {
       orders: orders.map(db.convertDocToObj),
     },
   };
-  db.disconnect();
 }
 
 export default function Products({ orders }) {
   const { data: session } = useSession();
   const router = useRouter();
+  const isTabletOrPhone = useMediaQuery("(max-width:819px)");
 
+  const [sessionData, setSessionData] = useState(null);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    if (!session?.user.isAdmin) {
-      router.push("/");
-      //make unauthorized page later
+    setSessionData(session);
+    if (!sessionData) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    } else {
+      setLoading(false);
     }
-  }, []);
-  if(!session?.user.isAdmin){
-
-    return <div className={styles.AdminDashboardContainer}><h1>401 Not Authorized</h1> </div>
+  }, [session]);
+  if (!sessionData && loading === false) {
+    router.push("/");
   }
   const [selectedOrder, setSelectedOrder] = React.useState("");
   const [open, setOpen] = React.useState(false);
@@ -49,8 +56,6 @@ export default function Products({ orders }) {
     setOpen(false);
   };
 
-  const isTabletOrPhone = useMediaQuery("(max-width:819px)");
-
   return (
     <>
       <Head>
@@ -60,57 +65,67 @@ export default function Products({ orders }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {!isTabletOrPhone ? (
-        <>
+        loading ? (
           <div className={styles.AdminDashboardContainer}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-end",
-                width: "80%",
-                gap: "20px",
-              }}
-            ></div>
-            <AdminRow></AdminRow>
-            {orders &&
-              orders.map((order) => {
-                return (
-                  <div className={styles.AdminProductRow} key={order._id}>
-                    <div className={styles.AdminUserRowSingleElement}>
-                      <h3 style={{ textTransform: "uppercase" }}>
-                        {order.orderNumber}
-                      </h3>
-                    </div>
-                    <div className={styles.AdminUserRowSingleElement}>
-                      <h3>{order.date}</h3>
-                    </div>
-                    <div className={styles.AdminUserRowSingleElement}>
-                      <h3>{order.customer_details.name}</h3>
-                    </div>
-                    <div className={styles.AdminProductRowSingleElement}>
-                      {order.isSent === false ? (
-                        <h3 style={{ color: "red" }}>No</h3>
-                      ) : (
-                        <h3 style={{ color: "green" }}>Yes</h3>
-                      )}
-                    </div>
-                    <div className={styles.AdminProductRowSingleElementIcon}>
-                      <BsFillGearFill
-                        style={{ cursor: "pointer" }}
-                        onClick={() => handleOpen(order)}
-                      ></BsFillGearFill>
-                    </div>
-                  </div>
-                );
-              })}
+            <CircularProgress color="inherit" />
           </div>
-          <AdminOrder
-            order={selectedOrder}
-            handleClose={handleClose}
-            open={open}
-            setOpen={setOpen}
-          ></AdminOrder>
-        </>
+        ) : !sessionData ? (
+          <div className={styles.AdminDashboardContainer}>
+            <h1>401 - Not authorized user!</h1>
+          </div>
+        ) : (
+          <>
+            <div className={styles.AdminDashboardContainer}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "flex-end",
+                  width: "80%",
+                  gap: "20px",
+                }}
+              ></div>
+              <AdminRow></AdminRow>
+              {orders &&
+                orders.map((order) => {
+                  return (
+                    <div className={styles.AdminProductRow} key={order._id}>
+                      <div className={styles.AdminUserRowSingleElement}>
+                        <h3 style={{ textTransform: "uppercase" }}>
+                          {order.orderNumber}
+                        </h3>
+                      </div>
+                      <div className={styles.AdminUserRowSingleElement}>
+                        <h3>{order.date}</h3>
+                      </div>
+                      <div className={styles.AdminUserRowSingleElement}>
+                        <h3>{order.customer_details.name}</h3>
+                      </div>
+                      <div className={styles.AdminProductRowSingleElement}>
+                        {order.isSent === false ? (
+                          <h3 style={{ color: "red" }}>No</h3>
+                        ) : (
+                          <h3 style={{ color: "green" }}>Yes</h3>
+                        )}
+                      </div>
+                      <div className={styles.AdminProductRowSingleElementIcon}>
+                        <BsFillGearFill
+                          style={{ cursor: "pointer" }}
+                          onClick={() => handleOpen(order)}
+                        ></BsFillGearFill>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+            <AdminOrder
+              order={selectedOrder}
+              handleClose={handleClose}
+              open={open}
+              setOpen={setOpen}
+            ></AdminOrder>
+          </>
+        )
       ) : (
         <div className={styles.AdminDashboardContainer}>
           <h1> Not supported on mobile</h1>

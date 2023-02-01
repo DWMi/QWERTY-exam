@@ -34,15 +34,18 @@ const AdminProduct = (props) => {
   const [main, setMain] = React.useState("");
 
   const [name, setName] = React.useState("");
+  const [brand, setBrand] = React.useState("");
+  const [imageOne, setImageOne] = React.useState("");
+  const [imageTwo, setImageTwo] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [qty, setQty] = React.useState("");
   const [category, setCategory] = React.useState("");
   const [description, setDescription] = React.useState("");
 
   useEffect(() => {
-    //hello
     router.push("/admin/products");
     setName("");
+    setBrand("");
     setPrice("");
     setQty("");
     setCategory("");
@@ -54,22 +57,68 @@ const AdminProduct = (props) => {
   const submitHandler = async ({
     _id,
     name,
-    pictures,
+    brand,
+    img1,
+    img2,
     price,
     qty,
     category,
   }) => {
     try {
-      const response = await axios.post("/api/admin/editProduct", {
-        _id: props.product._id,
-        name: name || props.product.name,
-        description: description || props.product.description,
-        pictures,
-        price: price || props.product.price,
-        qty: qty || props.product.qty,
-        category: category || props.product.category,
-      });
+      setCategory(props.product.category);
+      const uploadPreset = "qwerty";
+      const url = "https://api.cloudinary.com/v1_1/dmz4jw3ob/image/upload";
+
+      const formDataOne = new FormData();
+      formDataOne.append("upload_preset", uploadPreset);
+      formDataOne.append("file", imageOne);
+
+      const formDataTwo = new FormData();
+      formDataTwo.append("upload_preset", uploadPreset);
+      formDataTwo.append("file", imageTwo);
+
+      const imageResponseOne = await fetch(url, {
+        method: "POST",
+        body: formDataOne,
+      }).then((r) => r.json());
+      let image2slug;
+      if (imageTwo) {
+        const imageResponseTwo = await fetch(url, {
+          method: "POST",
+          body: formDataTwo,
+        }).then((r) => r.json());
+        image2slug = imageResponseTwo.secure_url;
+      }
+      if (category === "Keyboards") {
+        const response = await axios.post("/api/admin/editProduct", {
+          _id: props.product._id,
+          name: name || props.product.name,
+          brand: brand || props.product.brand,
+          description: description || props.product.description,
+          img1: imageResponseOne.secure_url || props.product.img1,
+          img2: image2slug || props.product.img2,
+          price: price || props.product.price,
+          qty: qty || props.product.qty,
+          category: category || props.product.category,
+        });
+      } else {
+        const response = await axios.post("/api/admin/editProductNoSwitches", {
+          _id: props.product._id,
+          name: name || props.product.name,
+          brand: brand || props.product.brand,
+          description: description || props.product.description,
+          img1: imageResponseOne.secure_url || props.product.img1,
+          img2: image2slug || props.product.img2,
+          price: price || props.product.price,
+          qty: qty || props.product.qty,
+          category: category || props.product.category,
+        });
+      }
+      console.log(imageResponseOne.secure_url);
+      console.log(image2slug);
+
       setName("");
+      setBrand("");
       setPrice("");
       setQty("");
       setCategory("");
@@ -149,6 +198,19 @@ const AdminProduct = (props) => {
                   height={"100"}
                   alt={props.product.name}
                 />
+                <input
+                  id="img1"
+                  type="file"
+                  name="img1"
+                  accept="image"
+                  onInput={(e) => {
+                    setImageOne(e.target.files[0]);
+                  }}
+                  {...register("img1", {
+                    required: false,
+                  })}
+                ></input>
+
                 <Image
                   style={{ objectFit: "contain" }}
                   src={props.product.img2}
@@ -156,15 +218,40 @@ const AdminProduct = (props) => {
                   height={"100"}
                   alt={props.product.name}
                 />
+                <input
+                  id="img2"
+                  type="file"
+                  name="img2"
+                  onInput={(e) => {
+                    setImageTwo(e.target.files[0]);
+                  }}
+                  {...register("img2", {
+                    required: false,
+                  })}
+                ></input>
               </>
             ) : (
-              <Image
-                style={{ objectFit: "contain" }}
-                src={props.product.img1}
-                width={"100"}
-                height={"100"}
-                alt={props.product.name}
-              />
+              <>
+                <Image
+                  style={{ objectFit: "contain" }}
+                  src={props.product.img1}
+                  width={"100"}
+                  height={"100"}
+                  alt={props.product.name}
+                />
+                <input
+                  id="img1"
+                  type="file"
+                  name="img1"
+                  accept="image"
+                  onInput={(e) => {
+                    setImageOne(e.target.files[0]);
+                  }}
+                  {...register("img1", {
+                    required: false,
+                  })}
+                ></input>
+              </>
             )}
           </div>
           <div className={styles.AdminProductRowSingleElement}>
@@ -206,9 +293,42 @@ const AdminProduct = (props) => {
             ></input>
           </div>
           <div className={styles.AdminProductRowSingleElement}>
+            <h3>Brand:</h3>
+            <select
+              {...register("brand", {
+                required: false,
+              })}
+              value={brand}
+              onChange={(event) => {
+                setMain(event.target.value);
+                setBrand(event.target.value);
+              }}
+              className={styles.LoginEmailInput}
+              type="text"
+              id="brand"
+              placeholder="Add brand"
+              autoFocus
+            >
+              <option value="">Select brand</option>;
+              {props.category &&
+                props.category.map((cat) => {
+                  return (
+                    cat.brands &&
+                    cat.brands.map((brand) => {
+                      return (
+                        <option key={brand._id} value={brand.brandName}>
+                          {brand.brandName}
+                        </option>
+                      );
+                    })
+                  );
+                })}
+            </select>
+          </div>
+          <div className={styles.AdminProductRowSingleElement}>
             {" "}
             <h3 htmlFor="category">Choose a category:</h3>
-            <input
+            <select
               {...register("category", {
                 required: false,
               })}
@@ -218,11 +338,15 @@ const AdminProduct = (props) => {
                 setCategory(event.target.value);
               }}
               className={styles.LoginEmailInput}
-              placeholder={props.product.category}
+              placeholder="Add category"
               type="text"
               id="category"
               autoFocus
-            ></input>
+            >
+              <option value="">Select category</option>
+              <option value="Keyboards">Keyboards</option>
+              <option value="Accessories">Accessories</option>
+            </select>
           </div>
           {main.length === 0 ? (
             <button
