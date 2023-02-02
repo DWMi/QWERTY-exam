@@ -91,6 +91,19 @@
   scale: 1.1;
 }
 
+@media screen and (max-width: 1500px) {
+  .AdminProductRow {
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .AdminProductRow {
+    font-size: 14px !important;
+    gap: 20px;
+  }
+}
+
 @media screen and (max-width: 590px) {
   .AdminProductRow {
     width: 100%;
