@@ -47,14 +47,14 @@ export default function Products({ products }) {
 
   const router = useRouter();
 
-  const [sessionData, setSessionData] = useState(null);
+  const [sessionData, setSessionData] = useState(false);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setSessionData(session);
+    setSessionData(session?.user.isAdmin);
     if (!sessionData) {
       setTimeout(() => {
         setLoading(false);
-      }, 1000);
+      }, 1500);
     } else {
       setLoading(false);
     }

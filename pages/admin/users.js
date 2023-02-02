@@ -28,18 +28,18 @@ export default function Products({ users }) {
   const { data: session } = useSession();
   const router = useRouter();
   const isTabletOrPhone = useMediaQuery("(max-width:819px)");
-  const [sessionData, setSessionData] = useState(null);
+  const [sessionData, setSessionData] = useState(false);
   const [loading, setLoading] = useState(true);
   const [selectedUser, setSelectedUser] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const [openDelete, setOpenDelete] = React.useState(false);
 
   useEffect(() => {
-    setSessionData(session);
+    setSessionData(session?.user.isAdmin);
     if (!sessionData) {
       setTimeout(() => {
         setLoading(false);
-      }, 1000);
+      }, 1500);
     } else {
       setLoading(false);
     }
