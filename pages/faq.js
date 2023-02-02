@@ -24,6 +24,12 @@ const faq = () => {
         "Many of our mechanical keyboards have customizable lighting options, allowing you to change the color and brightness of the backlit keys.",
     },
     {
+      question:
+        "What is the difference between the switches listed on your product page?",
+      answer:
+        "Cherry MX switches are mechanical switches used in PC keyboards. They differ in actuation force, tactile feedback, and sound: Brown (45g, tactile bump), Blue (50g, tactile and audible), Red (45g, smooth, linear), Black (60g, smooth, linear). Personal preference and intended use determine the best choice.",
+    },
+    {
       question: "Do you offer any warranties on your keyboards?",
       answer:
         "Yes, we offer a one-year warranty on all of our keyboard products",
@@ -60,9 +66,12 @@ const faq = () => {
     },
     {
       question: "What are cookies?",
-      answer:
-        `Cookies are small text files that are stored on a user's computer or mobile device by a website. They are used to remember a user's preferences, browsing history, and other information. For more information, click `,
-      link: <Link style={{textDecoration:'underline'}} href='/cookies'>here</Link>
+      answer: `Cookies are small text files that are stored on a user's computer or mobile device by a website. They are used to remember a user's preferences, browsing history, and other information. For more information, click `,
+      link: (
+        <Link style={{ textDecoration: "underline" }} href="/cookies">
+          here
+        </Link>
+      ),
     },
   ];
 
@@ -70,11 +79,17 @@ const faq = () => {
     <>
       <Head>
         <title>QWERTY - FAQs</title>
-        <meta name="description" content="QWERTY - Your one-stop shop for custom built mechanical keyboards, accessories, and more. We specialize in Keychron, Ducky, Yunzii, Varmilo and other mechanical keyboard brands."/>
-        <meta name="keywords" content="mechanical keyboard, custom keyboard, Keychron, Ducky, Yunzii, Varmilo, keyboard accessories"/>
-        <meta name="robots" content="index, follow"/>
-        <meta name="author" content="QWERTY"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta
+          name="description"
+          content="QWERTY - Your one-stop shop for custom built mechanical keyboards, accessories, and more. We specialize in Keychron, Ducky, Yunzii, Varmilo and other mechanical keyboard brands."
+        />
+        <meta
+          name="keywords"
+          content="mechanical keyboard, custom keyboard, Keychron, Ducky, Yunzii, Varmilo, keyboard accessories"
+        />
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="QWERTY" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={s.faqContainer}>
@@ -95,7 +110,11 @@ const faq = () => {
                   <IoIosArrowDown />
                 )}
               </div>
-              {activeQuestion === index && <p>{question.answer} {question.link}</p>}
+              {activeQuestion === index && (
+                <p>
+                  {question.answer} {question.link}
+                </p>
+              )}
             </div>
           ))}
         </div>

@@ -80,7 +80,7 @@ export default function SingleProduct({ product }) {
               src={imgSrc1}
               width={1000}
               height={1000}
-              style={{ objectFit: "contain", width: "100%", height: "70%" }}
+              style={{ objectFit: "contain", height: "70%" }}
             />
 
             {product.img2 ? (
@@ -130,7 +130,7 @@ export default function SingleProduct({ product }) {
                       product.switches.map((keySwitch) => {
                         return (
                           <MenuItem
-                          key={keySwitch}
+                            key={keySwitch}
                             value={keySwitch}
                             style={{
                               paddingRight: "0",

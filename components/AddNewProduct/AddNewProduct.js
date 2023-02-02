@@ -219,29 +219,56 @@ const AddNewProd = (props) => {
           <div className={styles.AdminProductRowSingleElement}>
             {" "}
             <h3 style={{ textAlign: "center" }}>Pictures:</h3>
-            <input
-              id="img1"
-              type="file"
-              name="img1"
-              accept="image"
-              onInput={(e) => {
-                setImageOne(e.target.files[0]);
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                gap: "10px",
               }}
-              {...register("img1", {
-                required: false,
-              })}
-            ></input>
-            <input
-              id="img2"
-              type="file"
-              name="img2"
-              onInput={(e) => {
-                setImageTwo(e.target.files[0]);
-              }}
-              {...register("img2", {
-                required: false,
-              })}
-            ></input>
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+              >
+                <input
+                  id="img1"
+                  type="file"
+                  name="img1"
+                  accept="image"
+                  onInput={(e) => {
+                    setImageOne(e.target.files[0]);
+                  }}
+                  {...register("img1", {
+                    required: false,
+                  })}
+                ></input>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+              >
+                <input
+                  id="img2"
+                  type="file"
+                  name="img2"
+                  onInput={(e) => {
+                    setImageTwo(e.target.files[0]);
+                  }}
+                  {...register("img2", {
+                    required: false,
+                  })}
+                ></input>
+              </div>
+            </div>
           </div>
           <div className={styles.AdminProductRowSingleElement}>
             {" "}

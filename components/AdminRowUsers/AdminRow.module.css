@@ -26,3 +26,16 @@
   justify-content: center;
   width: 100%;
 }
+
+@media screen and (max-width: 1500px) {
+  .AdminProductRow {
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .AdminProductRow {
+    font-size: 13px !important;
+    gap: 20px;
+  }
+}

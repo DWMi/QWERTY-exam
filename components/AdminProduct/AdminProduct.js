@@ -190,46 +190,70 @@ const AdminProduct = (props) => {
             <h3 style={{ textAlign: "center" }}>Pictures:</h3>
             {props.product.category === "Keyboards" ||
             props.product.brand === "Cables" ? (
-              <>
-                <Image
-                  style={{ objectFit: "contain" }}
-                  src={props.product.img1}
-                  width={"100"}
-                  height={"100"}
-                  alt={props.product.name}
-                />
-                <input
-                  id="img1"
-                  type="file"
-                  name="img1"
-                  accept="image"
-                  onInput={(e) => {
-                    setImageOne(e.target.files[0]);
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    gap: "10px",
                   }}
-                  {...register("img1", {
-                    required: false,
-                  })}
-                ></input>
-
-                <Image
-                  style={{ objectFit: "contain" }}
-                  src={props.product.img2}
-                  width={"100"}
-                  height={"100"}
-                  alt={props.product.name}
-                />
-                <input
-                  id="img2"
-                  type="file"
-                  name="img2"
-                  onInput={(e) => {
-                    setImageTwo(e.target.files[0]);
+                >
+                  <Image
+                    style={{ objectFit: "contain" }}
+                    src={props.product.img1}
+                    width={"100"}
+                    height={"100"}
+                    alt={props.product.name}
+                  />
+                  <input
+                    id="img1"
+                    type="file"
+                    name="img1"
+                    accept="image"
+                    onInput={(e) => {
+                      setImageOne(e.target.files[0]);
+                    }}
+                    {...register("img1", {
+                      required: false,
+                    })}
+                  ></input>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    gap: "10px",
                   }}
-                  {...register("img2", {
-                    required: false,
-                  })}
-                ></input>
-              </>
+                >
+                  <Image
+                    style={{ objectFit: "contain" }}
+                    src={props.product.img2}
+                    width={"100"}
+                    height={"100"}
+                    alt={props.product.name}
+                  />
+                  <input
+                    id="img2"
+                    type="file"
+                    name="img2"
+                    onInput={(e) => {
+                      setImageTwo(e.target.files[0]);
+                    }}
+                    {...register("img2", {
+                      required: false,
+                    })}
+                  ></input>
+                </div>
+              </div>
             ) : (
               <>
                 <Image
