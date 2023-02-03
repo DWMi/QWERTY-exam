@@ -109,15 +109,7 @@ export default function Products({ products }) {
         ) : (
           <>
             <div className={styles.AdminDashboardContainer}>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "flex-end",
-                  width: "80%",
-                  gap: "20px",
-                }}
-              >
+              <div className={styles.AdminDashboardButtonContainer}>
                 <button
                   className={styles.AdminButton}
                   type="submit"
