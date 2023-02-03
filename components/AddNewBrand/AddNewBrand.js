@@ -78,6 +78,7 @@ const AddNewBrand = (props) => {
       setMain("");
       props.setOpenBrand(false);
       router.push("/admin/products");
+      console.log(response);
     } catch (err) {
       console.log(getError(err));
     }

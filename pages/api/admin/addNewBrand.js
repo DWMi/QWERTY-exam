@@ -23,8 +23,10 @@ async function handler(req, res) {
   await db.connect();
   const updateProd = await Category.findOneAndUpdate(filter, { $push: update });
   updateProd.save();
-  await db.disconnect();
-  res.json(req.body);
+  setTimeout(() => {
+    db.disconnect();
+  }, 5000);
+  res.send(req.body);
 }
 
 export default handler;
