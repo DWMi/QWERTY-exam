@@ -20,6 +20,15 @@
   margin-bottom: 100px;
 }
 
+.AdminDashboardButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 80%;
+  gap: 20px;
+  transition: all 200ms ease-in-out;
+}
+
 .AdminProductRow {
   display: flex;
   flex-direction: row;
@@ -93,6 +102,9 @@
 
 @media screen and (max-width: 1200px) {
   .AdminProductRow {
+    width: 100% !important;
+  }
+  .AdminDashboardButtonContainer {
     width: 100% !important;
   }
 }
